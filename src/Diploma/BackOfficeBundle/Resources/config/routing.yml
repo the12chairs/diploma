@@ -1,0 +1,3 @@
+posts_index:
+    path: /posts
+    defaults: { _controller: DiplomaBackOfficeBundle:Post:index}
