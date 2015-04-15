@@ -3,49 +3,76 @@
 
 {% block page -%}
 
-    <div class="col-md-1"></div>
-    <div class="col-md-6">
-        <div id="postlist">
-            <div class="panel">
-                <div class="panel-heading">
-                    <div class="text-center">
-                        <div class="row">
-                            <div class="pull-left">
-                                <h3>{{ entity.title }}</h3>
+    <ul class="nav nav-tabs bordered">
+        <li class="active">
+            <a href="#post_tab" data-toggle="tab">Статья</a>
+        </li>
+        <li>
+            <a href="#sandbox_tab" data-toggle="tab">Песочница</a>
+        </li>
+        <li>
+            <a href="#test_tab" data-toggle="tab">Тесты</a>
+        </li>
+    </ul>
+
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="post_tab">
+            <div class="container" style="width:93%;">
+                <div class="col-md-1"></div>
+                <div class="col-md-6">
+                    <div id="postlist">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <div class="text-center">
+                                    <div class="row">
+                                        <div class="pull-left">
+                                            <h3>{{ entity.title }}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+                                {% autoescape "js" %}
+                                {{ entity.postText | raw }}
+                                {% endautoescape %}
+                            </div>
+
+                            <div class="panel-footer">
+                                <div class="pull-right">
+                                    <h4><small>{{ entity.autor.username }} в <em>2014-07-30 18:30:00</em></small></h4>
+                                </div>
+                                {% for tag in entity.tags %}
+                                    <span class="label label-default">{{ tag.title | capitalize }}</span>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="panel-body">
-                    {% autoescape "js" %}
-                    {{ entity.postText | raw }}
-                    {% endautoescape %}
-                </div>
+                <div class="clearfix"></div>
+                <a class="btn btn-primary" href="{{ path('post') }}">
+                    К списку статей
+                </a>
 
-                <div class="panel-footer">
-                    <div class="pull-right">
-                        <h4><small>{{ entity.autor.username }} в <em>2014-07-30 18:30:00</em></small></h4>
-                    </div>
-                    {% for tag in entity.tags %}
-                        <span class="label label-default">{{ tag.title | capitalize }}</span>
-                    {% endfor %}
-                </div>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-primary" href="{{ path('post_edit', { 'id': entity.id }) }}">
+                        Редактировать
+                    </a>
+                    <a class="btn btn-danger" href="{{ path('post_delete', { 'id': entity.id }) }}">
+                        Удалить
+                    </a>
+                {% endif %}
+
             </div>
+        </div>
+        <div class="tab-pane fade" id="test_tab">
+            Заглющка
+        </div>
+        <div class="tab-pane fade" id="sandbox_tab">
+            Заглющка
         </div>
     </div>
 
-    <div class="clearfix"></div>
-    <a class="btn btn-primary" href="{{ path('post') }}">
-        К списку статей
-    </a>
-
-    {% if is_granted('ROLE_ADMIN') %}
-        <a class="btn btn-primary" href="{{ path('post_edit', { 'id': entity.id }) }}">
-            Редактировать
-        </a>
-        <a class="btn btn-danger" href="{{ path('post_delete', { 'id': entity.id }) }}">
-            Удалить
-        </a>
-    {% endif %}
 {% endblock %}

@@ -22,9 +22,8 @@ post_edit:
 post_update:
     path:     /{id}/update
     defaults: { _controller: "DiplomaBackOfficeBundle:Post:update" }
-    methods:  [POST, PUT]
 
 post_delete:
     path:     /{id}/delete
     defaults: { _controller: "DiplomaBackOfficeBundle:Post:delete" }
-    methods:  [POST, DELETE]
+
