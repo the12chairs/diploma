@@ -1,38 +1,56 @@
-{% extends '::base.html.twig' %}
+{% extends 'DiplomaBackOfficeBundle::layout.html.twig' %}
 
-{% block body -%}
-    <h1>Post list</h1>
+{% block page -%}
 
-
+    <div class="container">
+        <div class="page-header">
+            <h1>Статьи</h1>
+            <p>
+                На сайте собрана большая подборка статей и заданий по темам курса "Вычислительная математика"
+            </p>
+        </div>
+    </div>
+    <div class="row">
         {% for entity in entities %}
 
-            {{ entity.autor.username }}
+            <div class="col-md-1"></div>
+            <div class="col-md-6">
+                <div id="postlist">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div class="text-center">
+                                <div class="row">
+                                    <div class="pull-left">
+                                        <h3>{{ entity.title }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-            {{ entity.title }}
+                        <div class="panel-body">
+                            {% autoescape "js" %}
+                            {{ entity.postText | raw }}
+                            {% endautoescape %}
+                        </div>
 
-            {% autoescape "js" %}
-                {{ entity.postText | raw }}
-            {% endautoescape %}
+                        <div class="panel-footer">
+                            <div class="pull-right">
+                                <h4><small>{{ entity.autor.username }} в <em>2014-07-30 18:30:00</em></small></h4>
+                            </div>
+                            {% for tag in entity.tags %}
+                                <span class="label label-default">{{ tag.title | capitalize }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            {% for tag in entity.tags %}
-                {{ tag.id }}
-            {% endfor %}
-
-            <ul>
-                <li>
-                    <a href="{{ path('post_show', { 'id': entity.id }) }}">show</a>
-                </li>
-                <li>
-                    <a href="{{ path('post_edit', { 'id': entity.id }) }}">edit</a>
-                </li>
-            </ul>
-
+            <div class="clearfix"></div>
+            <a class="btn btn-primary" href="{{ path('post_show', { 'id': entity.id }) }}">Подробнее</a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="btn btn-primary" href="{{ path('post_edit', { 'id': entity.id }) }}">Редактировать</a>
+            {% endif %}
         {% endfor %}
-        <ul>
-        <li>
-            <a href="{{ path('post_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+        </div>
+
+{% endblock %}

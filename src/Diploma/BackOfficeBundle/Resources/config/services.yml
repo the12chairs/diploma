@@ -1,4 +1,7 @@
 services:
-#    diploma_back_office.example:
-#        class: Diploma\BackOfficeBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    diploma.back_office.menu.voter.request:
+        class: Diploma\BackOfficeBundle\Menu\RequestVoter
+        arguments:
+            - @service_container
+        tags:
+            - { name: knp_menu.voter }

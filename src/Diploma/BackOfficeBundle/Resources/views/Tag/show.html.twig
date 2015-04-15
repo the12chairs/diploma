@@ -1,6 +1,7 @@
-{% extends '::base.html.twig' %}
+{% extends 'DiplomaBackOfficeBundle::layout.html.twig' %}
 
-{% block body -%}
+{% block page -%}
+
     <h1>Tag</h1>
 
     <table class="record_properties">
@@ -29,4 +30,5 @@
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
+
 {% endblock %}
