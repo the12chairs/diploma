@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Post list</h1>
+
+
+        {% for entity in entities %}
+
+            {{ entity.autor.username }}
+
+            {{ entity.title }}
+
+            {% autoescape "js" %}
+                {{ entity.postText | raw }}
+            {% endautoescape %}
+
+            {% for tag in entity.tags %}
+                {{ tag.id }}
+            {% endfor %}
+
+            <ul>
+                <li>
+                    <a href="{{ path('post_show', { 'id': entity.id }) }}">show</a>
+                </li>
+                <li>
+                    <a href="{{ path('post_edit', { 'id': entity.id }) }}">edit</a>
+                </li>
+            </ul>
+
+        {% endfor %}
+        <ul>
+        <li>
+            <a href="{{ path('post_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

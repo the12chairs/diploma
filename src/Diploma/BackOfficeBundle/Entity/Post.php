@@ -5,6 +5,7 @@ namespace Diploma\BackOfficeBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use DoctrineExtensions\Taggable\Taggable;
 use Doctrine\Common\Collections\ArrayCollection;
+use Diploma\BackOfficeBundle\Entity\Tag;
 /**
  * Post
  *
@@ -42,7 +43,17 @@ class Post implements Taggable
      */
     protected $postText;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="posts")
+     * @ORM\JoinTable(name="posts_tags")
+     **/
     protected $tags;
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
+
 
     public function getId()
     {

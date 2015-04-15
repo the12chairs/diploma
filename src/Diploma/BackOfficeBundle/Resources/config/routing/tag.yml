@@ -1,0 +1,30 @@
+tag:
+    path:     /
+    defaults: { _controller: "DiplomaBackOfficeBundle:Tag:index" }
+
+tag_show:
+    path:     /{id}/show
+    defaults: { _controller: "DiplomaBackOfficeBundle:Tag:show" }
+
+tag_new:
+    path:     /new
+    defaults: { _controller: "DiplomaBackOfficeBundle:Tag:new" }
+
+tag_create:
+    path:     /create
+    defaults: { _controller: "DiplomaBackOfficeBundle:Tag:create" }
+    methods:  POST
+
+tag_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DiplomaBackOfficeBundle:Tag:edit" }
+
+tag_update:
+    path:     /{id}/update
+    defaults: { _controller: "DiplomaBackOfficeBundle:Tag:update" }
+    methods:  [POST, PUT]
+
+tag_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DiplomaBackOfficeBundle:Tag:delete" }
+    methods:  [POST, DELETE]

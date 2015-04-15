@@ -1,3 +1,11 @@
+diploma_back_office_tag:
+    resource: "@DiplomaBackOfficeBundle/Resources/config/routing/tag.yml"
+    prefix:   /tag
+
+diploma_back_office_post:
+    resource: "@DiplomaBackOfficeBundle/Resources/config/routing/post.yml"
+    prefix:   /post
+
 posts_index:
-    path: /posts
-    defaults: { _controller: DiplomaBackOfficeBundle:Post:index}
+    path: /
+    defaults: { _controller: DiplomaBackOfficeBundle:Post:index }

@@ -2,15 +2,16 @@
 
 namespace Diploma\BackOfficeBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use \FPN\TagBundle\Entity\Tag as BaseTag;
+use Diploma\BackOfficeBundle\Entity\Post;
 /**
  * Tag
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class Tag extends BaseTag
+class Tag
 {
     /**
      * @var integer
@@ -22,9 +23,19 @@ class Tag extends BaseTag
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tagging", mappedBy="tag", fetch="EAGER")
+     * @ORM\Column(name="title", type="string")
      **/
-    protected $tagging;
+    protected $title;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Post", mappedBy="tags")
+     */
+    protected $posts;
+
+    public function __construct()
+    {
+        $this->posts = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -34,5 +45,22 @@ class Tag extends BaseTag
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getPosts()
+    {
+        return $this->posts;
     }
 }
