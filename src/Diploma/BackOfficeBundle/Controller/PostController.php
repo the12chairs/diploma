@@ -19,14 +19,23 @@ class PostController extends Controller
      * Lists all Post entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('DiplomaBackOfficeBundle:Post')->findAll();
+        $paginator  = $this->get('knp_paginator');
+
+        $dql   = "SELECT p FROM DiplomaBackOfficeBundle:Post p";
+        $query = $em->createQuery($dql);
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            10
+        );
 
         return $this->render('DiplomaBackOfficeBundle:Post:index.html.twig', array(
-            'entities' => $entities,
+            'pagination' => $pagination
         ));
     }
     /**

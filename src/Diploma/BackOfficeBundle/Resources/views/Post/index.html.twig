@@ -1,7 +1,6 @@
 {% extends 'DiplomaBackOfficeBundle::layout.html.twig' %}
 
 {% block page -%}
-
     <div class="container">
         <div class="page-header">
             <h1>Статьи</h1>
@@ -11,7 +10,7 @@
         </div>
     </div>
     <div class="row">
-        {% for entity in entities %}
+        {% for entity in pagination %}
 
             <div class="col-md-1"></div>
             <div class="col-md-6">
@@ -53,4 +52,7 @@
         {% endfor %}
         </div>
 
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 {% endblock %}

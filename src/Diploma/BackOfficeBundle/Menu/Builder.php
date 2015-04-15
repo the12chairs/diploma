@@ -19,7 +19,6 @@ class Builder extends ContainerAware
             ->setAttribute('dropdown', true)
         ;
 
-
         $menu['Post']->addChild('Index', array(
             'route' => 'post',
             'label' => 'Список статей'
@@ -38,7 +37,6 @@ class Builder extends ContainerAware
         ))
             ->setAttribute('icon', 'icon-tags')
             ->setAttribute('divider_prepend', true);
-        ;
 
         return $menu;
     }
