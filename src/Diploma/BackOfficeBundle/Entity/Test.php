@@ -33,7 +33,7 @@ class Test
     protected $questions;
 
     /**
-    * @ORM\OneToMany(targetEntity="TestResult", mappedBy="results")
+    * @ORM\OneToMany(targetEntity="TestResult", mappedBy="test")
     **/
     protected $results;
 
@@ -78,7 +78,7 @@ class Test
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -111,7 +111,7 @@ class Test
     /**
      * Get questions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getQuestions()
     {
@@ -144,13 +144,22 @@ class Test
     /**
      * Get results
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getResults()
     {
         return $this->results;
     }
 
+    public function getResult($user)
+    {
+        foreach($this->results as $result) {
+            if($result->getUser()->getUsername() == $user) {
+                return $result->getPoints();
+            }
+        }
+        return 0;
+    }
     /**
      * Set post
      *
@@ -167,7 +176,7 @@ class Test
     /**
      * Get post
      *
-     * @return \Diploma\BackOfficeBundle\Entity\Post 
+     * @return \Diploma\BackOfficeBundle\Entity\Post
      */
     public function getPost()
     {

@@ -1,7 +1,8 @@
 {% extends 'DiplomaBackOfficeBundle::layout.html.twig' %}
 
-
 {% block page -%}
+
+    {% set user = app.security.getToken().getUser() %}
 
     <ul class="nav nav-tabs bordered">
         <li class="active">
@@ -68,7 +69,22 @@
             </div>
         </div>
         <div class="tab-pane fade" id="test_tab">
-            Заглющка
+
+            <h2>Доступные тесты:</h2>
+
+            {% for test in entity.getTests %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-push-8">{{test.title}}</div>
+                        <div class="col-md-4">
+                            Ваш результат: {{test.getResult(user)}}
+                            <a class="btn btn-primary">Пройти</a>
+                        </div>
+
+
+                    </div>
+                </div>
+            {% endfor %}
         </div>
         <div class="tab-pane fade" id="sandbox_tab">
             Заглющка

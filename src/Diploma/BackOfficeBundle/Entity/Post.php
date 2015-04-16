@@ -52,9 +52,9 @@ class Post
     * @ORM\Column(name="created_at", type="datetime")
     */
     protected $createdAt;
-    
+
     /**
-    * @ORM\OneToMany(targetEntity="Test", mappedBy="tests")
+    * @ORM\OneToMany(targetEntity="Test", mappedBy="post")
     **/
     protected $tests;
 
@@ -167,7 +167,7 @@ class Post
     /**
      * Get tests
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTests()
     {
