@@ -31,7 +31,7 @@ class QuestionVariant
 
     /**
     * @var
-    * @ORM\ManyToOne(targetEntity="Question", inversedBy="answers", cascade={"all"})
+    * @ORM\ManyToOne(targetEntity="Answer", inversedBy="answers", cascade={"all"})
     * @ORM\JoinColumn(name="answer_id", referencedColumnName="id")
     */
     protected $answer;
@@ -69,7 +69,7 @@ class QuestionVariant
     /**
      * Get variantText
      *
-     * @return string 
+     * @return string
      */
     public function getVariantText()
     {
@@ -92,7 +92,7 @@ class QuestionVariant
     /**
      * Get question
      *
-     * @return \Diploma\BackOfficeBundle\Entity\Question 
+     * @return \Diploma\BackOfficeBundle\Entity\Question
      */
     public function getQuestion()
     {
@@ -115,7 +115,7 @@ class QuestionVariant
     /**
      * Get answer
      *
-     * @return \Diploma\BackOfficeBundle\Entity\Question 
+     * @return \Diploma\BackOfficeBundle\Entity\Question
      */
     public function getAnswer()
     {
