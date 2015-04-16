@@ -3,16 +3,10 @@
 
 {% block page -%}
 
-    <h1>Post creation</h1>
+    <h1>Добавление статьи</h1>
 
-    {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('post') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
-
+    {{form(form) }}
+    <a class="btn btn-primary" href="{{ path('post') }}">
+        К списку статей
+    </a>
 {% endblock %}

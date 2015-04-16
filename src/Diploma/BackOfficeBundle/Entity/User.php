@@ -27,10 +27,16 @@ class User extends BaseUser
      **/
     protected $posts;
 
+
+    /**
+    * @ORM\OneToMany(targetEntity="TestResult", mappedBy="results")
+    **/
+    protected $results;
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {

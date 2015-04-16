@@ -28,13 +28,13 @@
 
                         <div class="panel-body">
                             {% autoescape "js" %}
-                            {{ entity.postText | raw }}
+                                {{ entity.postText | slice(0,500) | raw }}{% if entity.postText | length > 500 %}...{% endif %}
                             {% endautoescape %}
                         </div>
 
                         <div class="panel-footer">
                             <div class="pull-right">
-                                <h4><small>{{ entity.autor.username }} в <em>2014-07-30 18:30:00</em></small></h4>
+                                <h4><small>{{ entity.autor.username }} в <em>{{entity.createdAt | date ('d-m-Y H:i:s') }}</em></small></h4>
                             </div>
                             {% for tag in entity.tags %}
                                 <span class="label label-default">{{ tag.title | capitalize }}</span>

@@ -3,7 +3,6 @@
 namespace Diploma\BackOfficeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use DoctrineExtensions\Taggable\Taggable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Diploma\BackOfficeBundle\Entity\Tag;
 /**
@@ -12,7 +11,7 @@ use Diploma\BackOfficeBundle\Entity\Tag;
  * @ORM\Table()
  * @ORM\Entity
  */
-class Post implements Taggable
+class Post
 {
     /**
      * @var integer
@@ -49,9 +48,20 @@ class Post implements Taggable
      **/
     protected $tags;
 
+    /**
+    * @ORM\Column(name="created_at", type="datetime")
+    */
+    protected $createdAt;
+    
+    /**
+    * @ORM\OneToMany(targetEntity="Test", mappedBy="tests")
+    **/
+    protected $tests;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
 
@@ -97,13 +107,14 @@ class Post implements Taggable
         return $this->tags;
     }
 
-    public function getTaggableType()
+    public function setCreatedAt(\DateTime $createdAt)
     {
-        return 'acme_tag';
+        $this->createdAt = $createdAt;
     }
 
-    public function getTaggableId()
+    public function getCreatedAt()
     {
-        return $this->getId();
+        return $this->createdAt;
     }
+
 }

@@ -15,23 +15,32 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
+            ->add('title', 'text', array(
+                'label' => 'Заголовок'
+            ))
             ->add('postText', 'ckeditor', array(
                 'transformers' => array('html_purifier'),
                 'toolbar' => array('document','basicstyles'),
                 'toolbar_groups' => array(
                     'document' => array('Source'
                 )),
-
+                'label' => ' '
             ))
             ->add('tags', 'entity', array(
+                'label' => 'Добавить тэги',
                 'class' => 'DiplomaBackOfficeBundle:Tag',
                 'property' => 'title',
                 'multiple' => true
             ))
+            ->add('submit','submit', array(
+                'label' => 'Сохранить',
+                'attr' => array(
+                    'class' => 'btn btn-success'
+                )
+            ))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

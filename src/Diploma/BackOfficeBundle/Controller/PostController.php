@@ -25,7 +25,7 @@ class PostController extends Controller
 
         $paginator  = $this->get('knp_paginator');
 
-        $dql   = "SELECT p FROM DiplomaBackOfficeBundle:Post p";
+        $dql   = "SELECT p FROM DiplomaBackOfficeBundle:Post p ORDER BY p.createdAt DESC";
         $query = $em->createQuery($dql);
 
         $pagination = $paginator->paginate(
@@ -80,8 +80,6 @@ class PostController extends Controller
             'action' => $this->generateUrl('post_create'),
             'method' => 'POST',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
     }
