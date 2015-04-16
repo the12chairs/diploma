@@ -1,0 +1,30 @@
+test:
+    path:     /
+    defaults: { _controller: "DiplomaBackOfficeBundle:Test:index" }
+
+test_show:
+    path:     /{id}/show
+    defaults: { _controller: "DiplomaBackOfficeBundle:Test:show" }
+
+test_new:
+    path:     /new
+    defaults: { _controller: "DiplomaBackOfficeBundle:Test:new" }
+
+test_create:
+    path:     /create
+    defaults: { _controller: "DiplomaBackOfficeBundle:Test:create" }
+    methods:  POST
+
+test_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DiplomaBackOfficeBundle:Test:edit" }
+
+test_update:
+    path:     /{id}/update
+    defaults: { _controller: "DiplomaBackOfficeBundle:Test:update" }
+    methods:  [POST, PUT]
+
+test_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DiplomaBackOfficeBundle:Test:delete" }
+    methods:  [POST, DELETE]

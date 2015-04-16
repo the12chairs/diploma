@@ -29,7 +29,8 @@ class Builder extends ContainerAware
             'route' => 'post_new',
             'label' => 'Добавить статью'
         ))
-            ->setAttribute('icon', 'icon-pencil');
+            ->setAttribute('icon', 'icon-pencil')
+        ;
 
         $menu->addChild('Tag', array(
             'label' => 'Тэги',
@@ -37,6 +38,14 @@ class Builder extends ContainerAware
         ))
             ->setAttribute('icon', 'icon-tags')
             ->setAttribute('divider_prepend', true);
+
+        $menu->addChild('Test', array(
+            'label' => 'Тесты',
+            'route' => 'test'
+        ))
+            ->setAttribute('icon', 'icon-edit')
+            ->setAttribute('divider_prepend', true)
+        ;
 
         return $menu;
     }

@@ -6,6 +6,10 @@ diploma_back_office_post:
     resource: "@DiplomaBackOfficeBundle/Resources/config/routing/post.yml"
     prefix:   /post
 
+diploma_back_office_test:
+    resource: "@DiplomaBackOfficeBundle/Resources/config/routing/test.yml"
+    prefix:   /test
+
 diploma_back_office_homepage:
     path:     /
     defaults: { _controller: "DiplomaBackOfficeBundle:Post:index" }

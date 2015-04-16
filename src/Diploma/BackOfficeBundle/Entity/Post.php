@@ -117,4 +117,60 @@ class Post
         return $this->createdAt;
     }
 
+
+    /**
+     * Add tags
+     *
+     * @param \Diploma\BackOfficeBundle\Entity\Tag $tags
+     * @return Post
+     */
+    public function addTag(\Diploma\BackOfficeBundle\Entity\Tag $tags)
+    {
+        $this->tags[] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param \Diploma\BackOfficeBundle\Entity\Tag $tags
+     */
+    public function removeTag(\Diploma\BackOfficeBundle\Entity\Tag $tags)
+    {
+        $this->tags->removeElement($tags);
+    }
+
+    /**
+     * Add tests
+     *
+     * @param \Diploma\BackOfficeBundle\Entity\Test $tests
+     * @return Post
+     */
+    public function addTest(\Diploma\BackOfficeBundle\Entity\Test $tests)
+    {
+        $this->tests[] = $tests;
+
+        return $this;
+    }
+
+    /**
+     * Remove tests
+     *
+     * @param \Diploma\BackOfficeBundle\Entity\Test $tests
+     */
+    public function removeTest(\Diploma\BackOfficeBundle\Entity\Test $tests)
+    {
+        $this->tests->removeElement($tests);
+    }
+
+    /**
+     * Get tests
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTests()
+    {
+        return $this->tests;
+    }
 }

@@ -49,4 +49,70 @@ class User extends BaseUser
     }
 
 
+
+    /**
+     * Add posts
+     *
+     * @param \Diploma\BackOfficeBundle\Entity\Post $posts
+     * @return User
+     */
+    public function addPost(\Diploma\BackOfficeBundle\Entity\Post $posts)
+    {
+        $this->posts[] = $posts;
+
+        return $this;
+    }
+
+    /**
+     * Remove posts
+     *
+     * @param \Diploma\BackOfficeBundle\Entity\Post $posts
+     */
+    public function removePost(\Diploma\BackOfficeBundle\Entity\Post $posts)
+    {
+        $this->posts->removeElement($posts);
+    }
+
+    /**
+     * Get posts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * Add results
+     *
+     * @param \Diploma\BackOfficeBundle\Entity\TestResult $results
+     * @return User
+     */
+    public function addResult(\Diploma\BackOfficeBundle\Entity\TestResult $results)
+    {
+        $this->results[] = $results;
+
+        return $this;
+    }
+
+    /**
+     * Remove results
+     *
+     * @param \Diploma\BackOfficeBundle\Entity\TestResult $results
+     */
+    public function removeResult(\Diploma\BackOfficeBundle\Entity\TestResult $results)
+    {
+        $this->results->removeElement($results);
+    }
+
+    /**
+     * Get results
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getResults()
+    {
+        return $this->results;
+    }
 }

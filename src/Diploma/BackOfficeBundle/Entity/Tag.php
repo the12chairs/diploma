@@ -63,4 +63,27 @@ class Tag
     {
         return $this->posts;
     }
+
+    /**
+     * Add posts
+     *
+     * @param \Diploma\BackOfficeBundle\Entity\Post $posts
+     * @return Tag
+     */
+    public function addPost(\Diploma\BackOfficeBundle\Entity\Post $posts)
+    {
+        $this->posts[] = $posts;
+
+        return $this;
+    }
+
+    /**
+     * Remove posts
+     *
+     * @param \Diploma\BackOfficeBundle\Entity\Post $posts
+     */
+    public function removePost(\Diploma\BackOfficeBundle\Entity\Post $posts)
+    {
+        $this->posts->removeElement($posts);
+    }
 }
