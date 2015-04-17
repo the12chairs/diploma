@@ -1,0 +1,28 @@
+question:
+    path:     /
+    defaults: { _controller: "DiplomaBackOfficeBundle:Question:index" }
+
+question_show:
+    path:     /{id}/show
+    defaults: { _controller: "DiplomaBackOfficeBundle:Question:show" }
+
+question_new:
+    path:     /new
+    defaults: { _controller: "DiplomaBackOfficeBundle:Question:new" }
+
+question_create:
+    path:     /create
+    defaults: { _controller: "DiplomaBackOfficeBundle:Question:create" }
+    methods:  question
+
+question_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DiplomaBackOfficeBundle:Question:edit" }
+
+question_update:
+    path:     /{id}/update
+    defaults: { _controller: "DiplomaBackOfficeBundle:Question:update" }
+
+question_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DiplomaBackOfficeBundle:Question:delete" }

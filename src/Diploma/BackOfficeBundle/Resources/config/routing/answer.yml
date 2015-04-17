@@ -1,0 +1,28 @@
+answer:
+    path:     /
+    defaults: { _controller: "DiplomaBackOfficeBundle:Answer:index" }
+
+answer_show:
+    path:     /{id}/show
+    defaults: { _controller: "DiplomaBackOfficeBundle:Answer:show" }
+
+answer_new:
+    path:     /new
+    defaults: { _controller: "DiplomaBackOfficeBundle:Answer:new" }
+
+answer_create:
+    path:     /create
+    defaults: { _controller: "DiplomaBackOfficeBundle:Answer:create" }
+    methods:  answer
+
+answer_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DiplomaBackOfficeBundle:Answer:edit" }
+
+answer_update:
+    path:     /{id}/update
+    defaults: { _controller: "DiplomaBackOfficeBundle:Answer:update" }
+
+answer_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DiplomaBackOfficeBundle:Answer:delete" }

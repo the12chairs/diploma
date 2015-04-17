@@ -1,0 +1,28 @@
+variant:
+    path:     /
+    defaults: { _controller: "DiplomaBackOfficeBundle:Variant:index" }
+
+variant_show:
+    path:     /{id}/show
+    defaults: { _controller: "DiplomaBackOfficeBundle:Variant:show" }
+
+variant_new:
+    path:     /new
+    defaults: { _controller: "DiplomaBackOfficeBundle:Variant:new" }
+
+variant_create:
+    path:     /create
+    defaults: { _controller: "DiplomaBackOfficeBundle:Variant:create" }
+    methods:  variant
+
+variant_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DiplomaBackOfficeBundle:Variant:edit" }
+
+variant_update:
+    path:     /{id}/update
+    defaults: { _controller: "DiplomaBackOfficeBundle:Variant:update" }
+
+variant_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DiplomaBackOfficeBundle:Variant:delete" }
