@@ -9,5 +9,7 @@
             <a class="btn btn-primary" href="{{ path('test_show', { 'id': entity.id }) }}">Показать</a>
             <a class="btn btn-primary" href="{{ path('test_edit', { 'id': entity.id }) }}">Редактировать</a>
         {% endfor %}
-
+    <br />
+    <div class="clearfix"></div>
+    <a class="btn btn-primary" href="{{ path('test_new') }}">Создать тест</a>
 {% endblock %}

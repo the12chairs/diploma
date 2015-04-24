@@ -13,7 +13,7 @@ question_new:
 question_create:
     path:     /create
     defaults: { _controller: "DiplomaBackOfficeBundle:Question:create" }
-    methods:  question
+    methods:  [POST]
 
 question_edit:
     path:     /{id}/edit

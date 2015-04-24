@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Diploma\BackOfficeBundle\Entity\Question;
 use Diploma\BackOfficeBundle\Form\QuestionType;
-
+use Diploma\BackOfficeBundle\Entity\Test;
 /**
  * Question controller.
  *
@@ -45,7 +45,7 @@ class QuestionController extends Controller
     public function createAction(Request $request)
     {
         $entity = new Question();
-        $form = $this->createCreateForm($entity);
+        $form = $this->createForm(new QuestionType($this->container), $entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -63,39 +63,31 @@ class QuestionController extends Controller
     }
 
     /**
-     * Creates a form to create a Question entity.
-     *
-     * @param Question $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Question $entity)
-    {
-        $form = $this->createForm(new QuestionType(), $entity, array(
-            'action' => $this->generateUrl('question_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
-    }
-
-    /**
      * Displays a form to create a new Question entity.
      *
      * @Route("/new", name="question_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction(Request $request)
     {
+        $testId = $request->get('testId', null);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $test = $em->getRepository('DiplomaBackOfficeBundle:Test')->find($testId);
+
         $entity = new Question();
-        $form   = $this->createCreateForm($entity);
+
+        $form = $this->createForm(new QuestionType($this->container), $entity, array (
+                'testId' => $testId
+            )
+        );
 
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'testId' => $testId
         );
     }
 
@@ -151,24 +143,7 @@ class QuestionController extends Controller
         );
     }
 
-    /**
-    * Creates a form to edit a Question entity.
-    *
-    * @param Question $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Question $entity)
-    {
-        $form = $this->createForm(new QuestionType(), $entity, array(
-            'action' => $this->generateUrl('question_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
-        return $form;
-    }
     /**
      * Edits an existing Question entity.
      *
@@ -187,7 +162,9 @@ class QuestionController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
+
+        $editForm = $this->createForm(new QuestionType($this->container), $entity);
+
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
