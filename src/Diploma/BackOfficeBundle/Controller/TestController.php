@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Diploma\BackOfficeBundle\Entity\Test;
 use Diploma\BackOfficeBundle\Form\TestType;
-
+use Diploma\BackOfficeBundle\Form\TestRunType;
 /**
  * Test controller.
  *
@@ -33,6 +33,30 @@ class TestController extends Controller
 
         return array(
             'entities' => $entities,
+        );
+    }
+
+    /**
+     * Test run.
+     *
+     * @Route("/", name="test_run")
+     * @Method("GET")
+     * @Template("DiplomaBackOfficeBundle:Test:test.html.twig")
+     */
+    public function testAction(Request $request)
+    {
+        $testId = $request->get('testId', null);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $test = $em->getRepository('DiplomaBackOfficeBundle:Test')->find($testId);
+        $form = $this->createForm(new TestRunType(), null, array(
+            'test' => $test
+        ));
+
+        return array(
+            'form' => $form->createView(),
+            'test' => $test,
         );
     }
     /**
