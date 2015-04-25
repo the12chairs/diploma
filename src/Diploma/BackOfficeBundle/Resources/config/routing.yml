@@ -28,5 +28,13 @@ diploma_back_office_homepage:
 
     # TODO: Specify!
 diploma_back_office_profile:
-    path:     /
+    path:     /profile
     defaults: { _controller: "DiplomaBackOfficeBundle:Post:index" }
+
+diploma_back_office_login:
+    path:     /login
+    defaults: { _controller: "DiplomaBackOfficeBundle:Security:login" }
+
+diploma_back_office_register:
+    path:     /register
+    defaults: { _controller: "DiplomaBackOfficeBundle:Registration:register" }

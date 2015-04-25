@@ -2,14 +2,16 @@
 
 
 {% block page -%}
-    <h1>Test creation</h1>
+    <h1>Создание теста</h1>
+
+
 
     {{ form(form) }}
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('test') }}">
-            Back to the list
+        <a class="btn btn-primary" href="{{ path('test') }}">
+            К списку тестов
         </a>
     </li>
 </ul>

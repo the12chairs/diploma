@@ -5,3 +5,7 @@ services:
             - @service_container
         tags:
             - { name: knp_menu.voter }
+    diploma.back_office.registration.form.type:
+        class: Diploma\BackOfficeBundle\Form\RegistrationFormType
+        tags:
+            - { name: form.type, alias: diploma_user_registration }

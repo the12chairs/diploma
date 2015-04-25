@@ -1,0 +1,32 @@
+{% extends 'DiplomaBackOfficeBundle::layout.html.twig' %}
+
+{% block page %}
+    {% block fos_user_content %}
+        {% if error %}
+            <div>{{ error }}</div>
+        {% endif %}
+        <div class="content">
+            <div class="row">
+                <form action="{{ path("fos_user_security_check") }}" method="post">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+                    <label for="username">Логин</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" name="_password" required="required" />
+
+                    <br />
+
+                    <input class="col-md-2 pull-left" type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                    <label class="col-md-10 pull-left" for="remember_me">Запомнить меня</label>
+
+                    <div class="clearfix"></div>
+
+                    <input class="btn btn-primary" type="submit" id="_submit" name="_submit" value="Вход" />
+                </form>
+            </div>
+        </div>
+    {% endblock %}
+
+{% endblock %}

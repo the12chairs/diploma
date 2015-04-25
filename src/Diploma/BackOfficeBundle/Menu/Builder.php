@@ -41,10 +41,24 @@ class Builder extends ContainerAware
 
         $menu->addChild('Test', array(
             'label' => 'Тесты',
-            'route' => 'test'
         ))
             ->setAttribute('icon', 'icon-edit')
             ->setAttribute('divider_prepend', true)
+            ->setAttribute('dropdown', true)
+        ;
+
+        $menu['Test']->addChild('Index', array(
+            'route' => 'test',
+            'label' => 'Список тестов'
+        ))
+            ->setAttribute('icon', 'icon-list')
+        ;
+
+        $menu['Test']->addChild('Create', array(
+            'route' => 'test_new',
+            'label' => 'Составить тест'
+        ))
+            ->setAttribute('icon', 'icon-pencil')
         ;
 
         return $menu;
@@ -83,6 +97,11 @@ class Builder extends ContainerAware
             $menu['User']->addChild('Login', array(
                 'route' => 'fos_user_security_login',
                 'label' => 'Войти'
+            ))
+                ->setAttribute('icon', 'icon-signin');
+            $menu['User']->addChild('Register', array(
+                'route' => 'fos_user_registration_register',
+                'label' => 'Зарегистрироваться'
             ))
                 ->setAttribute('icon', 'icon-signin');
         }
