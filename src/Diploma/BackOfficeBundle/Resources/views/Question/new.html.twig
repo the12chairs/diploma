@@ -1,15 +1,9 @@
-{% extends '::base.html.twig' %}
-
-{% block body -%}
+{% extends 'DiplomaBackOfficeBundle::layout.html.twig' %}
+{% block page -%}
     <h1>Question creation</h1>
+    <form method="POST" action="{{ path('question_create') }}">
+        {{ form_widget(form) }}
 
-    {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('question') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+        <button type="submit" class="btn btn-success">Сохранить</button>
+    </form>
 {% endblock %}
