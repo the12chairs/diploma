@@ -28,20 +28,17 @@ class QuestionVariant
     */
     protected $question;
 
-
-    /**
-    * @var
-    * @ORM\ManyToOne(targetEntity="Answer", inversedBy="answers", cascade={"all"})
-    * @ORM\JoinColumn(name="answer_id", referencedColumnName="id")
-    */
-    protected $answer;
-
-
     /**
     * @var string
     * @ORM\Column(name="variant_text", type="string", length=100)
     */
     private $variantText;
+
+
+    /**
+     * @ORM\Column(name="is_right", type="boolean")
+     */
+    protected $right;
 
     /**
      * Get id
@@ -99,26 +96,13 @@ class QuestionVariant
         return $this->question;
     }
 
-    /**
-     * Set answer
-     *
-     * @param \Diploma\BackOfficeBundle\Entity\Question $answer
-     * @return QuestionVariant
-     */
-    public function setAnswer(\Diploma\BackOfficeBundle\Entity\Question $answer = null)
+    public function isRight()
     {
-        $this->answer = $answer;
-
-        return $this;
+        return $this->right;
     }
 
-    /**
-     * Get answer
-     *
-     * @return \Diploma\BackOfficeBundle\Entity\Question
-     */
-    public function getAnswer()
+    public function setIsRight($right)
     {
-        return $this->answer;
+        $this->right = $right;
     }
 }

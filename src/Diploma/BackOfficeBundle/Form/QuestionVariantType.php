@@ -5,6 +5,7 @@ namespace Diploma\BackOfficeBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
 
 class QuestionVariantType extends AbstractType
 {
@@ -15,9 +16,20 @@ class QuestionVariantType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('variantText')
-            ->add('question')
-            ->add('answer')
+            ->add('variantText', 'text', array(
+                'label' => 'Вопрос'
+            ))
+            ->add('question', 'entity', array(
+                'class' => 'DiplomaBackOfficeBundle:Question',
+                'property' => 'questionText',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('q');
+                },
+            ))
+            ->add('isRight', 'checkbox', array(
+                'label' => 'Верный ответ?',
+                'required' => 'false'
+            ))
         ;
     }
     

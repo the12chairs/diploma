@@ -4,7 +4,14 @@
 {% block page -%}
 
     <h1>{{ entity.title }}</h1>
-    
+
+    {% for question in entity.questions %}
+        <div class="row">
+            {{ question.questionText }}
+            <a class="btn btn-primary" href="{{ path('variant_create', {'questionId': question.id}) }}">Варианты ответа</a>
+        </div>
+    {% endfor %}
+
     <a class="btn btn-primary" href="{{ path('test') }}">К сиписку тестов</a>
     <a class="btn btn-primary" href="{{ path('test_edit', { 'id': entity.id }) }}">Редактировать</a>
     <a class="btn btn-primary" href="{{ path('question_new', {'testId': entity.id}) }}">Добавить вопрос</a>

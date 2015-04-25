@@ -28,7 +28,7 @@ class Test
     private $title;
 
     /**
-    * @ORM\OneToMany(targetEntity="Question", mappedBy="questions")
+    * @ORM\OneToMany(targetEntity="Question", mappedBy="test")
     **/
     protected $questions;
 
@@ -40,7 +40,7 @@ class Test
     /**
     * @var
     * @ORM\ManyToOne(targetEntity="Post", inversedBy="tests", cascade={"all"})
-    * @ORM\JoinColumn(name="test_id", referencedColumnName="id")
+    * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
     */
     protected $post;
 

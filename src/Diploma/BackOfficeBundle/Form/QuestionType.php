@@ -44,10 +44,7 @@ class QuestionType extends AbstractType
                 'label' => 'Прикрепить к тесту',
                 'class' => 'DiplomaBackOfficeBundle:Test',
                 'property' => 'title',
-                'data' => $test,
-                'attr' => array(
-                    'disabled' => true
-                )
+                'data' => $test
             )) ;
     }
     

@@ -24,8 +24,8 @@ class Question
 
     /**
     * @var
-    * @ORM\ManyToOne(targetEntity="Test", inversedBy="questions", cascade={"all"})
-    * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
+    * @ORM\ManyToOne(targetEntity="Test", inversedBy="questions")
+    * @ORM\JoinColumn(name="test_id", referencedColumnName="id")
     */
     protected $test;
 
@@ -38,11 +38,6 @@ class Question
     * @ORM\OneToMany(targetEntity="QuestionVariant", mappedBy="variants")
     **/
     protected $variants;
-
-    /**
-    * @ORM\OneToMany(targetEntity="QuestionVariant", mappedBy="answers")
-    **/
-    protected $answers;
 
     /**
      * Get id
@@ -173,4 +168,5 @@ class Question
     {
         return $this->answers;
     }
+
 }

@@ -1,16 +1,10 @@
-{% extends '::base.html.twig' %}
+{% extends 'DiplomaBackOfficeBundle::layout.html.twig' %}
 
-{% block body -%}
-    <h1>Question edit</h1>
+{% block page -%}
+    <form method="POST" action="{{ path('question_edit', {'id': entity.id}) }}">
+        {{ form_widget(edit_form) }}
 
-    {{ form(edit_form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('question') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+        <button type="submit" class="btn btn-success">Сохранить</button>
+    </form>
+    <a class="btn btn-primary" href="{{ path('test_show', {id: entity.test.id}) }}">К тесту</a>
 {% endblock %}
