@@ -40,7 +40,7 @@ class VariantController extends Controller
      *
      * @Route("/", name="variant_create")
      * @Method("POST")
-     * @Template("DiplomaBackOfficeBundle:QuestionVariant:new.html.twig")
+     * @Template("DiplomaBackOfficeBundle:Variant:new.html.twig")
      */
     public function createAction(Request $request)
     {

@@ -28,3 +28,7 @@ test_delete:
     path:     /{id}/delete
     defaults: { _controller: "DiplomaBackOfficeBundle:Test:delete" }
     methods:  [POST, DELETE]
+
+test_run:
+    path:     /{id}/run
+    defaults: { _controller: "DiplomaBackOfficeBundle:Test:run" }

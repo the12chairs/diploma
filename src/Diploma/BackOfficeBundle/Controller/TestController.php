@@ -41,16 +41,16 @@ class TestController extends Controller
      *
      * @Route("/", name="test_run")
      * @Method("GET")
-     * @Template("DiplomaBackOfficeBundle:Test:test.html.twig")
+     * @Template("DiplomaBackOfficeBundle:Test:run.html.twig")
      */
-    public function testAction(Request $request)
+    public function runAction(Request $request)
     {
-        $testId = $request->get('testId', null);
+        $testId = $request->get('id', null);
 
         $em = $this->getDoctrine()->getManager();
 
         $test = $em->getRepository('DiplomaBackOfficeBundle:Test')->find($testId);
-        $form = $this->createForm(new TestRunType(), null, array(
+        $form = $this->createForm(new TestRunType($em), null, array(
             'test' => $test
         ));
 

@@ -35,7 +35,7 @@ class Question
     protected $questionText;
 
     /**
-    * @ORM\OneToMany(targetEntity="QuestionVariant", mappedBy="variants")
+    * @ORM\OneToMany(targetEntity="QuestionVariant", mappedBy="question")
     **/
     protected $variants;
 
@@ -136,37 +136,5 @@ class Question
         return $this->variants;
     }
 
-    /**
-     * Add answers
-     *
-     * @param \Diploma\BackOfficeBundle\Entity\QuestionVariant $answers
-     * @return Question
-     */
-    public function addAnswer(\Diploma\BackOfficeBundle\Entity\QuestionVariant $answers)
-    {
-        $this->answers[] = $answers;
-
-        return $this;
-    }
-
-    /**
-     * Remove answers
-     *
-     * @param \Diploma\BackOfficeBundle\Entity\QuestionVariant $answers
-     */
-    public function removeAnswer(\Diploma\BackOfficeBundle\Entity\QuestionVariant $answers)
-    {
-        $this->answers->removeElement($answers);
-    }
-
-    /**
-     * Get answers
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getAnswers()
-    {
-        return $this->answers;
-    }
 
 }

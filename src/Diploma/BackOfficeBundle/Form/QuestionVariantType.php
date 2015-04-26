@@ -28,7 +28,7 @@ class QuestionVariantType extends AbstractType
             ))
             ->add('isRight', 'checkbox', array(
                 'label' => 'Верный ответ?',
-                'required' => 'false'
+                'required' => false
             ))
         ;
     }

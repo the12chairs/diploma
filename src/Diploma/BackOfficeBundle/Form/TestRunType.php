@@ -2,6 +2,7 @@
 
 namespace Diploma\BackOfficeBundle\Form;
 
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -9,25 +10,35 @@ use Doctrine\ORM\EntityRepository;
 
 class TestRunType extends AbstractType
 {
+
+    protected $em;
+
+    public function _construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('title', 'text', array(
-                'label' => 'Название теста'
-            ))
-            ->add('post', 'entity', array(
-                'label' => 'Прикрепить к статье',
-                'class' => 'DiplomaBackOfficeBundle:Post',
-                'property' => 'title',
-                'query_builder' => function(EntityRepository $er) {
-                    return $er->createQueryBuilder('p');
-                },
-            ))
-        ;
+
+        $test = $options['test'];
+        $i = 1;
+        foreach($test->getQuestions() as $question) {
+            $builder->add('question' . $i, 'entity', array(
+                'label' => $question->getQuestionText(),
+                'class' => 'DiplomaBackOfficeBundle:QuestionVariant',
+                'property' => 'variantText',
+                'choices' => $question->getVariants(),
+                'expanded' => true,
+                'multiple' => true
+            ));
+            $i++;
+        }
+
     }
 
     /**
@@ -36,6 +47,7 @@ class TestRunType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
+            'test' => null
         ));
     }
 
@@ -46,4 +58,11 @@ class TestRunType extends AbstractType
     {
         return 'diploma_backofficebundle_test_run';
     }
+
+    public function _findVariants($question) {
+        $query = $this->em->createQuery("SELECT * FROM DiplomaBackOfficeBundle:QuestionVariant qv JOIN qv.question q WHERE q.id = :qId");
+        $query->setParameters(array("qId"=>$question->getId()));
+        return $query->getResult();
+    }
+
 }
