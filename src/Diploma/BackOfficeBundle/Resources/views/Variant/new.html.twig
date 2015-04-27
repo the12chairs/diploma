@@ -1,9 +1,14 @@
-{% extends '::base.html.twig' %}
+{% extends 'DiplomaBackOfficeBundle::layout.html.twig' %}
 
-{% block body -%}
+
+{% block page -%}
     <h1>QuestionVariant creation</h1>
 
-    {{ form(form) }}
+    <form action="{{ path('variant_create') }}" method="POST">
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-success">Сохранить</button>
+    </form>
+
 
         <ul class="record_actions">
     <li>

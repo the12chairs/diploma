@@ -15,6 +15,9 @@ class QuestionVariantType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+        $question = $options['question'];
+
         $builder
             ->add('variantText', 'text', array(
                 'label' => 'Вопрос'
@@ -22,9 +25,7 @@ class QuestionVariantType extends AbstractType
             ->add('question', 'entity', array(
                 'class' => 'DiplomaBackOfficeBundle:Question',
                 'property' => 'questionText',
-                'query_builder' => function(EntityRepository $er) {
-                    return $er->createQueryBuilder('q');
-                },
+                'data' => $question
             ))
             ->add('isRight', 'checkbox', array(
                 'label' => 'Верный ответ?',
@@ -39,7 +40,8 @@ class QuestionVariantType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Diploma\BackOfficeBundle\Entity\QuestionVariant'
+            'data_class' => 'Diploma\BackOfficeBundle\Entity\QuestionVariant',
+            'question' => null
         ));
     }
 

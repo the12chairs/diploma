@@ -8,7 +8,7 @@
     {% for question in entity.questions %}
         <div class="row">
             {{ question.questionText }}
-            <a class="btn btn-primary" href="{{ path('variant_create', {'questionId': question.id}) }}">Варианты ответа</a>
+            <a class="btn btn-primary" href="{{ path('variant_new', {'questionId': question.id}) }}">Варианты ответа</a>
         </div>
     {% endfor %}
 

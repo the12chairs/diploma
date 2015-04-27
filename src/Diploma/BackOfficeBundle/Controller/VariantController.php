@@ -45,7 +45,14 @@ class VariantController extends Controller
     public function createAction(Request $request)
     {
         $entity = new QuestionVariant();
-        $form = $this->createCreateForm($entity);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $id = $request->get('questionId', null);
+
+        $entity = new QuestionVariant();
+        $form = $this->createForm(new QuestionVariantType(), $entity);
+
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -88,10 +95,18 @@ class VariantController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $id = $request->get('questionId', null);
+
+        $question = $em->getRepository('DiplomaBackOfficeBundle:Question')->find($id);
+
         $entity = new QuestionVariant();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createForm(new QuestionVariantType(), $entity, array(
+            'question' => $question,
+        ));
 
         return array(
             'entity' => $entity,
