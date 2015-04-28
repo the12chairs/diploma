@@ -4,6 +4,10 @@
 {% block page -%}
     <h1>{{ test.title }}</h1>
 
-    {{ form_widget(form) }}
+    <form method="POST" action="{{ path('test_handle', {'id': test.id}) }}">
+        {{ form_widget(form) }}
+
+        <button type="submit" class="btn btn-primary">Проверить себя</button>
+    </form>
 
 {% endblock %}

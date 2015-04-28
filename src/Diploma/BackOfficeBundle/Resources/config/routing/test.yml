@@ -32,3 +32,7 @@ test_delete:
 test_run:
     path:     /{id}/run
     defaults: { _controller: "DiplomaBackOfficeBundle:Test:run" }
+
+test_handle:
+    path:     /{id}/run/handle
+    defaults: { _controller: "DiplomaBackOfficeBundle:Test:handle" }

@@ -34,7 +34,10 @@ class TestRunType extends AbstractType
                 'property' => 'variantText',
                 'choices' => $question->getVariants(),
                 'expanded' => true,
-                'multiple' => true
+                'multiple' => true,
+                'attr' => array(
+                    'class' => 'question-title'
+                )
             ));
             $i++;
         }

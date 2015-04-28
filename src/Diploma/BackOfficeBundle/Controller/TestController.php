@@ -2,6 +2,7 @@
 
 namespace Diploma\BackOfficeBundle\Controller;
 
+use Diploma\BackOfficeBundle\Entity\TestResult;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -59,6 +60,77 @@ class TestController extends Controller
             'test' => $test,
         );
     }
+
+    /**
+     * Handle test form.
+     *
+     * @Route("/", name="test_handle")
+     * @Method("POST")
+     * @Template("DiplomaBackOfficeBundle:Test:run.html.twig")
+     */
+    public function handleAction(Request $request)
+    {
+        $result = new TestResult();
+
+        $testId = $request->get('id', null);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $test = $em->getRepository('DiplomaBackOfficeBundle:Test')->find($testId);
+
+
+        $form = $this->createForm(new TestRunType($em), null, array(
+            'test' => $test
+        ));
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+
+            $data = $form->getData();
+
+            $testPoints = 0;
+
+            foreach($data as $question) {
+
+                $isRight = true;
+
+                if(sizeof($question) == 0) {
+                    $isRight = false;
+                }
+                foreach($question as $variant) {
+
+                    if(!$variant->isRight()) {
+                        $isRight = false;
+                    }
+                }
+
+                if($isRight) {
+                    $testPoints++;
+                }
+            }
+
+            $result->setUser($this->getUser());
+            $result->setTest($test);
+
+
+            $result->setPoints($testPoints);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($result);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('test_show', array(
+                'id' => $test->getId(),
+                'testPoints' => $testPoints
+
+            )));
+        }
+
+        return $this->redirect($this->generateUrl('test_show', array('id' => $test->getId())));
+    }
+
     /**
      * Creates a new Test entity.
      *

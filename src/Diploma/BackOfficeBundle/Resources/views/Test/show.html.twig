@@ -7,14 +7,25 @@
 
     {% for question in entity.questions %}
         <div class="row">
-            {{ question.questionText }}
-            <a class="btn btn-primary" href="{{ path('variant_new', {'questionId': question.id}) }}">Варианты ответа</a>
+            <h3>{{ question.questionText }}</h3>
+
+            {% for variant in question.variants %}
+                <div class="row">
+                    <div class="container">
+                        {{ variant.variantText }} {% if variant.right %}<i class="fa icon-check"></i>{% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+            <a class="btn btn-primary" href="{{ path('variant_new', {'questionId': question.id}) }}">Добавить вариант</a>
         </div>
     {% endfor %}
+    <br />
+    <div class="row">
+        <div class="container controls">
+            <a class="btn btn-primary" href="{{ path('test') }}">К сиписку тестов</a>
+            <a class="btn btn-primary" href="{{ path('test_edit', { 'id': entity.id }) }}">Редактировать</a>
+            <a class="btn btn-primary" href="{{ path('question_new', {'testId': entity.id}) }}">Добавить вопрос</a>
+        </div>
+    </div>
 
-    <a class="btn btn-primary" href="{{ path('test') }}">К сиписку тестов</a>
-    <a class="btn btn-primary" href="{{ path('test_edit', { 'id': entity.id }) }}">Редактировать</a>
-    <a class="btn btn-primary" href="{{ path('question_new', {'testId': entity.id}) }}">Добавить вопрос</a>
-
-</ul>
 {% endblock %}
