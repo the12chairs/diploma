@@ -1,0 +1,44 @@
+{% extends 'DiplomaBackOfficeBundle::layout.html.twig' %}
+
+
+{% block page -%}
+
+    <h1>{{ test.title }}</h1>
+    Ваш результат: {{ testPoints }}
+    {% for question in test.questions %}
+
+        {% set answered = answers['question' ~ loop.index] %}
+
+        <div class="row">
+            <h3>{{ question.questionText }}</h3>
+            {% set answeredQuestion = null %}
+
+            {% for variant in question.variants %}
+                <div class="row">
+                    <div class="container">
+                        {{ variant.variantText }}
+                        {% for ans in answered %}
+                            {% if ans.variantText == variant.variantText %}
+                                {% if variant.right %}
+                                    <i class="icon-check"></i>
+                                {% else %}
+                                    <i class="icon-remove"></i>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if variant.right and variant not in answered %}
+                            <i class="icon-check-empty"></i>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <br />
+    <div class="row">
+        <div class="container controls">
+            <a class="btn btn-primary" href="{{ path('test') }}">К сиписку тестов</a>
+        </div>
+    </div>
+
+{% endblock %}

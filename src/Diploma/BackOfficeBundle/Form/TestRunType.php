@@ -62,10 +62,4 @@ class TestRunType extends AbstractType
         return 'diploma_backofficebundle_test_run';
     }
 
-    public function _findVariants($question) {
-        $query = $this->em->createQuery("SELECT * FROM DiplomaBackOfficeBundle:QuestionVariant qv JOIN qv.question q WHERE q.id = :qId");
-        $query->setParameters(array("qId"=>$question->getId()));
-        return $query->getResult();
-    }
-
 }

@@ -121,11 +121,11 @@ class TestController extends Controller
             $em->persist($result);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('test_show', array(
-                'id' => $test->getId(),
-                'testPoints' => $testPoints
-
-            )));
+            return $this->render('DiplomaBackOfficeBundle:Test:results.html.twig', array(
+                'test' => $test,
+                'testPoints' => $testPoints,
+                'answers' => $data
+            ));
         }
 
         return $this->redirect($this->generateUrl('test_show', array('id' => $test->getId())));

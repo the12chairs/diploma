@@ -151,14 +151,19 @@ class Test
         return $this->results;
     }
 
-    public function getResult($user)
+    public function getMaxResult($user)
     {
+        $resArray = array();
         foreach($this->results as $result) {
             if($result->getUser()->getUsername() == $user) {
-                return $result->getPoints();
+                $resArray[] = $result->getPoints();
             }
         }
-        return 0;
+        if(empty($resArray)) {
+            return 0;
+        } else {
+            return max($resArray);
+        }
     }
     /**
      * Set post
