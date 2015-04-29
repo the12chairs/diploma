@@ -68,6 +68,28 @@ class Builder extends ContainerAware
             ->setAttribute('icon', 'icon-pencil')
         ;
 
+        $menu->addChild('Task', array(
+            'label' => 'Задания',
+        ))
+            ->setAttribute('icon', 'icon-columns')
+            ->setAttribute('divider_prepend', true)
+            ->setAttribute('dropdown', true)
+        ;
+
+        $menu['Task']->addChild('Index', array(
+            'route' => 'task',
+            'label' => 'Список заданий'
+        ))
+            ->setAttribute('icon', 'icon-list')
+        ;
+
+        $menu['Task']->addChild('Create', array(
+            'route' => 'task_new',
+            'label' => 'Создать индивидуальное задание'
+        ))
+            ->setAttribute('icon', 'icon-pencil')
+        ;
+
         return $menu;
     }
 

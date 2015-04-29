@@ -21,6 +21,21 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @var string
+     * @ORM\Column(name="firstname", type="string", length=100)
+     */
+    protected $firstname;
+    /**
+     * @var string
+     * @ORM\Column(name="lastname", type="string", length=100)
+     */
+    protected $lastname;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="posts")
+     **/
+    protected $tasks;
 
     /**
      * @ORM\OneToMany(targetEntity="Post", mappedBy="posts")
@@ -114,5 +129,29 @@ class User extends BaseUser
     public function getResults()
     {
         return $this->results;
+    }
+
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+
+        return true;
+    }
+
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+
+        return true;
     }
 }

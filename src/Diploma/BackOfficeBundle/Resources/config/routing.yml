@@ -18,6 +18,10 @@ diploma_back_office_variant:
     resource: "@DiplomaBackOfficeBundle/Resources/config/routing/variant.yml"
     prefix:   /variant
 
+diploma_back_office_task:
+    resource: "@DiplomaBackOfficeBundle/Resources/config/routing/task.yml"
+    prefix:   /task
+
 diploma_back_office_homepage:
     path:     /
     defaults: { _controller: "DiplomaBackOfficeBundle:Post:index" }
