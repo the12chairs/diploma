@@ -38,6 +38,34 @@ class PostController extends Controller
             'pagination' => $pagination
         ));
     }
+
+    /**
+     * Search by tags
+     */
+
+    public function searchAction(Request $request)
+    {
+
+        $tags = $request->get('tags');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $paginator  = $this->get('knp_paginator');
+
+        $dql   = "SELECT p FROM DiplomaBackOfficeBundle:Post p INNER JOIN DiplomaBackOfficeBundle:Tag t ORDER BY p.createdAt DESC";
+        $query = $em->createQuery($dql);
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            10
+        );
+
+        return $this->render('DiplomaBackOfficeBundle:Post:index.html.twig', array(
+            'pagination' => $pagination
+        ));
+    }
+
     /**
      * Creates a new Post entity.
      *

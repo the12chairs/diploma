@@ -27,3 +27,6 @@ post_delete:
     path:     /{id}/delete
     defaults: { _controller: "DiplomaBackOfficeBundle:Post:delete" }
 
+post_search:
+    path:      /search
+    defaults: { _controller: "DiplomaBackOfficeBundle:Post:search" }

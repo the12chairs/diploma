@@ -25,6 +25,13 @@ class Builder extends ContainerAware
         ))
             ->setAttribute('icon', 'icon-list');
 
+        $menu['Post']->addChild('Search', array(
+            'route' => 'post_search',
+            'label' => 'Поиск статей'
+        ))
+            ->setAttribute('icon', 'icon-search')
+        ;
+
         $menu['Post']->addChild('Create', array(
             'route' => 'post_new',
             'label' => 'Добавить статью'
