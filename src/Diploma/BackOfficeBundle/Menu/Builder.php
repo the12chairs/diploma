@@ -32,63 +32,76 @@ class Builder extends ContainerAware
             ->setAttribute('icon', 'icon-search')
         ;
 
-        $menu['Post']->addChild('Create', array(
-            'route' => 'post_new',
-            'label' => 'Добавить статью'
-        ))
-            ->setAttribute('icon', 'icon-pencil')
-        ;
+        if ($this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
+            $menu['Post']->addChild('Create', array(
+                'route' => 'post_new',
+                'label' => 'Добавить статью'
+            ))
+                ->setAttribute('icon', 'icon-pencil')
+            ;
+        }
 
-        $menu->addChild('Tag', array(
-            'label' => 'Тэги',
-            'route' => 'tag'
-        ))
-            ->setAttribute('icon', 'icon-tags')
-            ->setAttribute('divider_prepend', true);
 
-        $menu->addChild('Test', array(
-            'label' => 'Тесты',
-        ))
-            ->setAttribute('icon', 'icon-edit')
-            ->setAttribute('divider_prepend', true)
-            ->setAttribute('dropdown', true)
-        ;
+        if ($this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
+            $menu->addChild('Tag', array(
+                'label' => 'Тэги',
+                'route' => 'tag'
+            ))
+                ->setAttribute('icon', 'icon-tags')
+                ->setAttribute('divider_prepend', true);
+        }
 
-        $menu['Test']->addChild('Index', array(
-            'route' => 'test',
-            'label' => 'Список тестов'
-        ))
-            ->setAttribute('icon', 'icon-list')
-        ;
 
-        $menu['Test']->addChild('Create', array(
-            'route' => 'test_new',
-            'label' => 'Составить тест'
-        ))
-            ->setAttribute('icon', 'icon-pencil')
-        ;
+        if ($this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
+            $menu->addChild('Test', array(
+                'label' => 'Тесты',
+            ))
+                ->setAttribute('icon', 'icon-edit')
+                ->setAttribute('divider_prepend', true)
+                ->setAttribute('dropdown', true)
+            ;
 
-        $menu->addChild('Task', array(
-            'label' => 'Задания',
-        ))
-            ->setAttribute('icon', 'icon-columns')
-            ->setAttribute('divider_prepend', true)
-            ->setAttribute('dropdown', true)
-        ;
+            $menu['Test']->addChild('Index', array(
+                'route' => 'test',
+                'label' => 'Список тестов'
+            ))
+                ->setAttribute('icon', 'icon-list')
+            ;
 
-        $menu['Task']->addChild('Index', array(
-            'route' => 'task',
-            'label' => 'Список заданий'
-        ))
-            ->setAttribute('icon', 'icon-list')
-        ;
+            $menu['Test']->addChild('Create', array(
+                'route' => 'test_new',
+                'label' => 'Составить тест'
+            ))
+                ->setAttribute('icon', 'icon-pencil')
+            ;
+        }
 
-        $menu['Task']->addChild('Create', array(
-            'route' => 'task_new',
-            'label' => 'Создать индивидуальное задание'
-        ))
-            ->setAttribute('icon', 'icon-pencil')
-        ;
+
+        if ($this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
+            $menu->addChild('Task', array(
+                'label' => 'Задания',
+            ))
+                ->setAttribute('icon', 'icon-columns')
+                ->setAttribute('divider_prepend', true)
+                ->setAttribute('dropdown', true)
+            ;
+
+            $menu['Task']->addChild('Index', array(
+                'route' => 'task',
+                'label' => 'Список заданий'
+            ))
+                ->setAttribute('icon', 'icon-list')
+            ;
+
+            $menu['Task']->addChild('Create', array(
+                'route' => 'task_new',
+                'label' => 'Создать индивидуальное задание'
+            ))
+                ->setAttribute('icon', 'icon-pencil')
+            ;
+        }
+
+
 
         return $menu;
     }
@@ -110,7 +123,7 @@ class Builder extends ContainerAware
 
         if($username) {
             $menu['User']->addChild('Profile Edit', array(
-                'route' => 'diploma_back_office_profile',
+                'route' => 'user_edit',
                 'label' => 'Редактировать профиль'
             ))
                 ->setAttribute('icon', 'icon-edit')

@@ -154,4 +154,37 @@ class User extends BaseUser
 
         return true;
     }
+
+    /**
+     * Add tasks
+     *
+     * @param \Diploma\BackOfficeBundle\Entity\Task $tasks
+     * @return User
+     */
+    public function addTask(\Diploma\BackOfficeBundle\Entity\Task $tasks)
+    {
+        $this->tasks[] = $tasks;
+
+        return $this;
+    }
+
+    /**
+     * Remove tasks
+     *
+     * @param \Diploma\BackOfficeBundle\Entity\Task $tasks
+     */
+    public function removeTask(\Diploma\BackOfficeBundle\Entity\Task $tasks)
+    {
+        $this->tasks->removeElement($tasks);
+    }
+
+    /**
+     * Get tasks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
+    }
 }

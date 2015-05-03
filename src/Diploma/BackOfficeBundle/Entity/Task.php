@@ -52,11 +52,16 @@ class Task
      */
     protected $seen;
 
-
+    /**
+     * @var boolean
+     * @ORM\Column(name="is_right", type="boolean")
+     */
+    protected $right;
 
     public function __construct()
     {
         $this->seen = false;
+        $this->right = false;
     }
     /**
      * Get id
@@ -181,5 +186,38 @@ class Task
     public function isSeen()
     {
         return $this->seen;
+    }
+
+    /**
+     * Get seen
+     *
+     * @return boolean 
+     */
+    public function getSeen()
+    {
+        return $this->seen;
+    }
+
+    /**
+     * Set right
+     *
+     * @param boolean $right
+     * @return Task
+     */
+    public function setRight($right)
+    {
+        $this->right = $right;
+
+        return $this;
+    }
+
+    /**
+     * Get right
+     *
+     * @return boolean 
+     */
+    public function getRight()
+    {
+        return $this->right;
     }
 }

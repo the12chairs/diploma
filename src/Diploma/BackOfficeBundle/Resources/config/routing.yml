@@ -22,6 +22,10 @@ diploma_back_office_task:
     resource: "@DiplomaBackOfficeBundle/Resources/config/routing/task.yml"
     prefix:   /task
 
+diploma_back_office_user:
+    resource: "@DiplomaBackOfficeBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+
 diploma_back_office_homepage:
     path:     /
     defaults: { _controller: "DiplomaBackOfficeBundle:Post:index" }

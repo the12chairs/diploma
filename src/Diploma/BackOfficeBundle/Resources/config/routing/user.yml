@@ -1,0 +1,32 @@
+user:
+    path:     /
+    defaults: { _controller: "DiplomaBackOfficeBundle:User:index" }
+
+user_show:
+    path:     /{id}/show
+    defaults: { _controller: "DiplomaBackOfficeBundle:User:show" }
+
+user_new:
+    path:     /new
+    defaults: { _controller: "DiplomaBackOfficeBundle:User:new" }
+
+user_create:
+    path:     /create
+    defaults: { _controller: "DiplomaBackOfficeBundle:User:create" }
+    methods:  user
+
+user_edit:
+    path:     /edit
+    defaults: { _controller: "DiplomaBackOfficeBundle:User:edit" }
+
+user_update:
+    path:     /{id}/update
+    defaults: { _controller: "DiplomaBackOfficeBundle:User:update" }
+
+user_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DiplomaBackOfficeBundle:User:delete" }
+
+user_search:
+    path:      /search
+    defaults: { _controller: "DiplomaBackOfficeBundle:User:search" }
