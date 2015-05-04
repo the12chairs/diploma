@@ -1,15 +1,25 @@
 {% extends 'DiplomaBackOfficeBundle::layout.html.twig' %}
 
 {% block page -%}
-    <h1>User edit</h1>
+    <h1>Мой профиль</h1>
 
+    <hr />
+
+    <h2>Редактировать</h2>
     {{ form(edit_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('user') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+    <hr />
+
+    <h2>Индивидуальные задания</h2>
+
+    {% for task in tasks %}
+        {% autoescape "js" %}
+            {% if not task.right %} <i class="icon-check-empty"></i> {% else %} <i class="icon-check"></i> {% endif %}
+            <span class="pull-left">{{ task.text | slice(0,100) | raw }}{% if task.text | length > 100 %}...{% endif %}</span>
+            {% if not task.seen %} <i class="icon-certificate"></i> {% endif %}
+        {% endautoescape %}
+        <div class="clearfix"></div>
+        <a href="#" class="btn btn-primary">Выполнить</a>
+    {% endfor %}
+
 {% endblock %}

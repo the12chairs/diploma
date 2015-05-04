@@ -33,18 +33,18 @@ class User extends BaseUser
     protected $lastname;
 
     /**
-     * @ORM\OneToMany(targetEntity="Task", mappedBy="posts")
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="user")
      **/
     protected $tasks;
 
     /**
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="posts")
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="user")
      **/
     protected $posts;
 
 
     /**
-    * @ORM\OneToMany(targetEntity="TestResult", mappedBy="results")
+    * @ORM\OneToMany(targetEntity="TestResult", mappedBy="user")
     **/
     protected $results;
 

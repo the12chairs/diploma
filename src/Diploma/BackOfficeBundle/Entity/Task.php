@@ -36,13 +36,13 @@ class Task
 
     /**
      * @var string
-     * @ORM\Column(name="answer", type="text")
+     * @ORM\Column(name="answer", type="text", nullable=true)
      */
     protected $answer;
 
     /**
      * @var string
-     * @ORM\Column(name="right_answer", type="text")
+     * @ORM\Column(name="right_answer", type="text", nullable=true)
      */
     protected $rightAnswer;
 

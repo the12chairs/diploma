@@ -144,6 +144,7 @@ class UserController extends Controller
         $editForm = $this->createEditForm($entity);
 
         return array(
+            'tasks' => $entity->getTasks(),
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
         );

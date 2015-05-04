@@ -24,6 +24,7 @@ class TaskType extends AbstractType
                     )),
                 'label' => 'Текст задания'
             ))
+            /*
             ->add('answer', 'ckeditor', array(
                 'transformers' => array('html_purifier'),
                 'toolbar' => array('document','basicstyles'),
@@ -32,6 +33,7 @@ class TaskType extends AbstractType
                     )),
                 'label' => 'Ответ'
             ))
+            */
             ->add('rightAnswer', 'ckeditor', array(
                 'transformers' => array('html_purifier'),
                 'toolbar' => array('document','basicstyles'),

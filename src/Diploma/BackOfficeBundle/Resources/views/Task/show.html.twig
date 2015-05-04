@@ -11,12 +11,29 @@
             </tr>
             <tr>
                 <th>Text</th>
-                <td>{{ entity.text }}</td>
+                <td>
+                {% autoescape "js" %}
+                {{ entity.text | slice(0,500) | raw }}{% if entity.text | length > 500 %}...{% endif %}
+                {% endautoescape %}
+                </td>
             </tr>
             <tr>
-                <th>Answer</th>
-                <td>{{ entity.answer }}</td>
+                <th>Ответ</th>
+                <td>
+                    {% autoescape "js" %}
+                    {{ entity.answer | slice(0,100) | raw }}{% if entity.answer | length > 100 %}...{% endif %}
+                    {% endautoescape %}
+                </td>
             </tr>
+            <tr>
+                <th>Верный ответ</th>
+                <td>
+                    {% autoescape "js" %}
+                    {{ entity.rightAnswer | slice(0,100) | raw }}{% if entity.rightAnswer | length > 100 %}...{% endif %}
+                    {% endautoescape %}
+                </td>
+            </tr>
+
         </tbody>
     </table>
 

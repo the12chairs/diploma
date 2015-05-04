@@ -30,3 +30,7 @@ user_delete:
 user_search:
     path:      /search
     defaults: { _controller: "DiplomaBackOfficeBundle:User:search" }
+
+user_messages:
+    path:     /edit
+    defaults: { _controller: "DiplomaBackOfficeBundle:User:edit" }

@@ -1,15 +1,11 @@
 {% extends 'DiplomaBackOfficeBundle::layout.html.twig' %}
 
 {% block page -%}
-    <h1>Task creation</h1>
+    <h1>Составить индивидуальное задание</h1>
 
     {{ form(form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('task') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+    <a class="btn btn-primary" href="{{ path('task') }}">
+        К списку
+    </a>
 {% endblock %}

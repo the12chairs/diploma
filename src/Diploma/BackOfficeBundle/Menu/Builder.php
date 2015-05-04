@@ -130,6 +130,13 @@ class Builder extends ContainerAware
                 ->setAttribute('divider_append', true)
             ;
 
+            $menu['User']->addChild('Messages', array(
+                'route' => 'user_messages',
+                'label' => 'Сообщения'
+            ))
+                ->setAttribute('icon', 'icon-envelope')
+            ;
+
             $menu['User']->addChild('Logout', array(
                 'route' => 'fos_user_security_logout',
                 'label' => 'Выход'
