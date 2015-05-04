@@ -15,6 +15,7 @@ class TaskType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('user')
             ->add('text', 'ckeditor', array(
                 'transformers' => array('html_purifier'),
                 'toolbar' => array('document','basicstyles'),
@@ -39,7 +40,6 @@ class TaskType extends AbstractType
                     )),
                 'label' => 'Верный ответ'
             ))
-            ->add('user')
         ;
     }
     

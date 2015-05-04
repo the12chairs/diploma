@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Diploma\BackOfficeBundle\Entity\Post;
 use Diploma\BackOfficeBundle\Form\PostType;
-
+use Diploma\BackOfficeBundle\Form\SearchFormType;
 /**
  * Post controller.
  *
@@ -25,7 +25,7 @@ class PostController extends Controller
 
         $paginator  = $this->get('knp_paginator');
 
-        $dql   = "SELECT p FROM DiplomaBackOfficeBundle:Post p ORDER BY p.createdAt DESC";
+        $dql   = "SELECT p FROM DiplomaBackOfficeBundle:Post p";
         $query = $em->createQuery($dql);
 
         $pagination = $paginator->paginate(
@@ -46,14 +46,33 @@ class PostController extends Controller
     public function searchAction(Request $request)
     {
 
-        $tags = $request->get('tags');
-
         $em = $this->getDoctrine()->getManager();
-
         $paginator  = $this->get('knp_paginator');
 
-        $dql   = "SELECT p FROM DiplomaBackOfficeBundle:Post p INNER JOIN DiplomaBackOfficeBundle:Tag t ORDER BY p.createdAt DESC";
-        $query = $em->createQuery($dql);
+        $form = $this->createForm(new SearchFormType());
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $tags = $form->getData()['tags'][0];
+
+            if(!empty($tags)) {
+                $dql   =  "SELECT p FROM DiplomaBackOfficeBundle:Post p INNER JOIN p.tags t WHERE t IN (:tags)";
+
+                $query = $em->createQuery($dql);
+                $query->setParameter('tags', $tags);
+            } else {
+                $dql   = "SELECT p FROM DiplomaBackOfficeBundle:Post p";
+                $query = $em->createQuery($dql);
+            }
+
+        } else {
+            $dql   = "SELECT p FROM DiplomaBackOfficeBundle:Post p";
+            $query = $em->createQuery($dql);
+        }
+
+
 
         $pagination = $paginator->paginate(
             $query,
@@ -61,8 +80,9 @@ class PostController extends Controller
             10
         );
 
-        return $this->render('DiplomaBackOfficeBundle:Post:index.html.twig', array(
-            'pagination' => $pagination
+        return $this->render('DiplomaBackOfficeBundle:Post:search.html.twig', array(
+            'pagination' => $pagination,
+            'form' => $form->createView()
         ));
     }
 
