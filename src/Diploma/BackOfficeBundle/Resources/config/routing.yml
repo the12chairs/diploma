@@ -26,6 +26,10 @@ diploma_back_office_user:
     resource: "@DiplomaBackOfficeBundle/Resources/config/routing/user.yml"
     prefix:   /user
 
+diploma_back_office_message:
+    resource: "@DiplomaBackOfficeBundle/Resources/config/routing/message.yml"
+    prefix:   /message
+
 diploma_back_office_homepage:
     path:     /
     defaults: { _controller: "DiplomaBackOfficeBundle:Post:index" }

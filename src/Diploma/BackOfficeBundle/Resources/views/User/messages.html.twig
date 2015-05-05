@@ -1,0 +1,19 @@
+{% extends 'DiplomaBackOfficeBundle::layout.html.twig' %}
+
+{% block page -%}
+    <h1>Чат</h1>
+    <hr />
+        {% for message in messages %}
+
+            <div class="row">
+                {{ message.message }}
+                {% if message.from != null %}
+                    {{ message.from.username }}
+                {% endif %}
+                {{ message.createdAt | date ('d-m-Y H:i:s') }}
+            </div>
+
+        {% endfor %}
+
+        {{ render(controller('DiplomaBackOfficeBundle:Message:new')) }}
+{% endblock %}

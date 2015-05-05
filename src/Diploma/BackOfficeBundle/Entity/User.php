@@ -42,7 +42,16 @@ class User extends BaseUser
      **/
     protected $posts;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="user")
+     **/
+    protected $formMessages;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="user")
+     **/
+    protected $toMessages;
+    
     /**
     * @ORM\OneToMany(targetEntity="TestResult", mappedBy="user")
     **/
@@ -186,5 +195,71 @@ class User extends BaseUser
     public function getTasks()
     {
         return $this->tasks;
+    }
+
+    /**
+     * Add formMessages
+     *
+     * @param \Diploma\BackOfficeBundle\Entity\Message $formMessages
+     * @return User
+     */
+    public function addFormMessage(\Diploma\BackOfficeBundle\Entity\Message $formMessages)
+    {
+        $this->formMessages[] = $formMessages;
+
+        return $this;
+    }
+
+    /**
+     * Remove formMessages
+     *
+     * @param \Diploma\BackOfficeBundle\Entity\Message $formMessages
+     */
+    public function removeFormMessage(\Diploma\BackOfficeBundle\Entity\Message $formMessages)
+    {
+        $this->formMessages->removeElement($formMessages);
+    }
+
+    /**
+     * Get formMessages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFormMessages()
+    {
+        return $this->formMessages;
+    }
+
+    /**
+     * Add toMessages
+     *
+     * @param \Diploma\BackOfficeBundle\Entity\Message $toMessages
+     * @return User
+     */
+    public function addToMessage(\Diploma\BackOfficeBundle\Entity\Message $toMessages)
+    {
+        $this->toMessages[] = $toMessages;
+
+        return $this;
+    }
+
+    /**
+     * Remove toMessages
+     *
+     * @param \Diploma\BackOfficeBundle\Entity\Message $toMessages
+     */
+    public function removeToMessage(\Diploma\BackOfficeBundle\Entity\Message $toMessages)
+    {
+        $this->toMessages->removeElement($toMessages);
+    }
+
+    /**
+     * Get toMessages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getToMessages()
+    {
+        return $this->toMessages;
     }
 }

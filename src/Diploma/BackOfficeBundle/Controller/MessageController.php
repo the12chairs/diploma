@@ -7,21 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Diploma\BackOfficeBundle\Entity\User;
-use Diploma\BackOfficeBundle\Form\UserType;
+use Diploma\BackOfficeBundle\Entity\Message;
+use Diploma\BackOfficeBundle\Form\MessageType;
 
 /**
- * User controller.
+ * Message controller.
  *
- * @Route("/user")
+ * @Route("/message")
  */
-class UserController extends Controller
+class MessageController extends Controller
 {
 
     /**
-     * Lists all User entities.
+     * Lists all Message entities.
      *
-     * @Route("/", name="user")
+     * @Route("/", name="message")
      * @Method("GET")
      * @Template()
      */
@@ -29,57 +29,33 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('DiplomaBackOfficeBundle:User')->findAll();
+        $entities = $em->getRepository('DiplomaBackOfficeBundle:Message')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
-
     /**
-     * Lists all User entities.
+     * Creates a new Message entity.
      *
-     * @Route("/", name="user_messages")
-     * @Method("GET")
-     * @Template("DiplomaBackOfficeBundle:User:messages.html.twig")
-     */
-    public function indexMessagesAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-
-        $user = $this->getUser();
-
-        $dql   = "SELECT m FROM DiplomaBackOfficeBundle:Message m WHERE m.to = :user ORDER BY m.createdAt DESC";
-        $query = $em->createQuery($dql);
-        $query->setParameter('user', $user);
-        $query->setMaxResults(20);
-        $entities = $em->getRepository('DiplomaBackOfficeBundle:Message')->findAll();
-
-        return array(
-            'messages' => array_reverse($query->getResult())
-        );
-    }
-
-    /**
-     * Creates a new User entity.
-     *
-     * @Route("/", name="user_create")
+     * @Route("/", name="message_create")
      * @Method("POST")
-     * @Template("DiplomaBackOfficeBundle:User:new.html.twig")
+     * @Template("DiplomaBackOfficeBundle:Message:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new User();
+        $entity = new Message();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $entity->setFrom($this->getUser());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('user_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('user_messages'));
         }
 
         return array(
@@ -89,16 +65,16 @@ class UserController extends Controller
     }
 
     /**
-     * Creates a form to create a User entity.
+     * Creates a form to create a Message entity.
      *
-     * @param User $entity The entity
+     * @param Message $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(User $entity)
+    private function createCreateForm(Message $entity)
     {
-        $form = $this->createForm(new UserType(), $entity, array(
-            'action' => $this->generateUrl('user_create'),
+        $form = $this->createForm(new MessageType(), $entity, array(
+            'action' => $this->generateUrl('message_create'),
             'method' => 'POST',
         ));
 
@@ -108,15 +84,15 @@ class UserController extends Controller
     }
 
     /**
-     * Displays a form to create a new User entity.
+     * Displays a form to create a new Message entity.
      *
-     * @Route("/new", name="user_new")
+     * @Route("/new", name="message_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new User();
+        $entity = new Message();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -126,9 +102,9 @@ class UserController extends Controller
     }
 
     /**
-     * Finds and displays a User entity.
+     * Finds and displays a Message entity.
      *
-     * @Route("/{id}", name="user_show")
+     * @Route("/{id}", name="message_show")
      * @Method("GET")
      * @Template()
      */
@@ -136,10 +112,10 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('DiplomaBackOfficeBundle:User')->find($id);
+        $entity = $em->getRepository('DiplomaBackOfficeBundle:Message')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
+            throw $this->createNotFoundException('Unable to find Message entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -151,42 +127,43 @@ class UserController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing User entity.
+     * Displays a form to edit an existing Message entity.
      *
-     * @Route("/{id}/edit", name="user_edit")
+     * @Route("/{id}/edit", name="message_edit")
      * @Method("GET")
      * @Template()
      */
-    public function editAction()
+    public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $this->getUser();
+        $entity = $em->getRepository('DiplomaBackOfficeBundle:Message')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
+            throw $this->createNotFoundException('Unable to find Message entity.');
         }
 
         $editForm = $this->createEditForm($entity);
+        $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'tasks' => $entity->getTasks(),
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a User entity.
+    * Creates a form to edit a Message entity.
     *
-    * @param User $entity The entity
+    * @param Message $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(User $entity)
+    private function createEditForm(Message $entity)
     {
-        $form = $this->createForm(new UserType(), $entity, array(
-            'action' => $this->generateUrl('user_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new MessageType(), $entity, array(
+            'action' => $this->generateUrl('message_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -195,20 +172,20 @@ class UserController extends Controller
         return $form;
     }
     /**
-     * Edits an existing User entity.
+     * Edits an existing Message entity.
      *
-     * @Route("/{id}", name="user_update")
+     * @Route("/{id}", name="message_update")
      * @Method("PUT")
-     * @Template("DiplomaBackOfficeBundle:User:edit.html.twig")
+     * @Template("DiplomaBackOfficeBundle:Message:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('DiplomaBackOfficeBundle:User')->find($id);
+        $entity = $em->getRepository('DiplomaBackOfficeBundle:Message')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
+            throw $this->createNotFoundException('Unable to find Message entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -218,7 +195,7 @@ class UserController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('user_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('message_edit', array('id' => $id)));
         }
 
         return array(
@@ -228,9 +205,9 @@ class UserController extends Controller
         );
     }
     /**
-     * Deletes a User entity.
+     * Deletes a Message entity.
      *
-     * @Route("/{id}", name="user_delete")
+     * @Route("/{id}", name="message_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -240,21 +217,21 @@ class UserController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('DiplomaBackOfficeBundle:User')->find($id);
+            $entity = $em->getRepository('DiplomaBackOfficeBundle:Message')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find User entity.');
+                throw $this->createNotFoundException('Unable to find Message entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('user'));
+        return $this->redirect($this->generateUrl('message'));
     }
 
     /**
-     * Creates a form to delete a User entity by id.
+     * Creates a form to delete a Message entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -263,7 +240,7 @@ class UserController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('user_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('message_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

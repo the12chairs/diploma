@@ -32,5 +32,5 @@ user_search:
     defaults: { _controller: "DiplomaBackOfficeBundle:User:search" }
 
 user_messages:
-    path:     /edit
-    defaults: { _controller: "DiplomaBackOfficeBundle:User:edit" }
+    path:     /messages
+    defaults: { _controller: "DiplomaBackOfficeBundle:User:indexMessages" }

@@ -1,0 +1,28 @@
+message:
+    path:     /
+    defaults: { _controller: "DiplomaBackOfficeBundle:Message:index" }
+
+message_show:
+    path:     /{id}/show
+    defaults: { _controller: "DiplomaBackOfficeBundle:Message:show" }
+
+message_new:
+    path:     /new
+    defaults: { _controller: "DiplomaBackOfficeBundle:Message:new" }
+
+message_create:
+    path:     /create
+    defaults: { _controller: "DiplomaBackOfficeBundle:Message:create" }
+    methods:  POST
+
+message_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DiplomaBackOfficeBundle:Message:edit" }
+
+message_update:
+    path:     /{id}/update
+    defaults: { _controller: "DiplomaBackOfficeBundle:Message:update" }
+
+message_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DiplomaBackOfficeBundle:Message:delete" }
