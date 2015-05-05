@@ -45,7 +45,7 @@ class TaskController extends Controller
     public function createAction(Request $request)
     {
         $entity = new Task();
-        $form = $this->createCreateForm($entity);
+        $form = $form = $this->createForm(new TaskType(), $entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -91,7 +91,7 @@ class TaskController extends Controller
     public function newAction()
     {
         $entity = new Task();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createForm(new TaskType(), $entity);
 
         return array(
             'entity' => $entity,

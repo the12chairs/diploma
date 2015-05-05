@@ -3,16 +3,12 @@
 
 {% block page -%}
 
-    <h1>Tag creation</h1>
+    <h1>Добавить тэг</h1>
 
     {{ form(form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('tag') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+    <a class="btn btn-primary" href="{{ path('tag') }}">
+        К списку
+    </a>
 
 {% endblock %}

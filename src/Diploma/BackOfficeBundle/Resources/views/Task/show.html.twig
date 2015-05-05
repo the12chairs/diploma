@@ -36,18 +36,11 @@
 
         </tbody>
     </table>
+    <a class="btn btn-primary" href="{{ path('task') }}">
+        К списку
+    </a>
+    <a class="btn btn-primary" href="{{ path('task_edit', { 'id': entity.id }) }}">
+        Редактировать
+    </a>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('task') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('task_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
 {% endblock %}

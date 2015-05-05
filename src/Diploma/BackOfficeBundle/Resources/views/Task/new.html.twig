@@ -3,7 +3,11 @@
 {% block page -%}
     <h1>Составить индивидуальное задание</h1>
 
-    {{ form(form) }}
+    <form method="POST" action="{{ path('task_create') }}">
+        {{ form_widget(form) }}
+        <br />
+        <button type="submit" class="btn btn-success">Создать</button>
+    </form>
 
     <a class="btn btn-primary" href="{{ path('task') }}">
         К списку
