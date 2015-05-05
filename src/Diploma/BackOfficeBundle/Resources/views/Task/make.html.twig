@@ -1,0 +1,18 @@
+{% extends 'DiplomaBackOfficeBundle::layout.html.twig' %}
+
+{% block page -%}
+    <h1>Выполнить задание</h1>
+
+    {% autoescape "js" %}
+        {{ task.text | raw }}
+    {% endautoescape %}
+
+    <hr />
+    <h3>Дайте развернутый ответ</h3>
+    {{ form(edit_form) }}
+
+
+    <a class="btn btn-primary" href="{{ path('task') }}">
+        К списку
+    </a>
+{% endblock %}

@@ -29,10 +29,14 @@ task_delete:
     defaults: { _controller: "DiplomaBackOfficeBundle:Task:delete" }
     methods:  [POST, DELETE]
 
-task_run:
-    path:     /{id}/run
-    defaults: { _controller: "DiplomaBackOfficeBundle:Task:run" }
+task_make:
+    path:     /{id}/make
+    defaults: { _controller: "DiplomaBackOfficeBundle:Task:make" }
 
-task_handle:
-    path:     /{id}/run/handle
-    defaults: { _controller: "DiplomaBackOfficeBundle:Task:handle" }
+task_answer:
+    path:     /{id}/answer
+    defaults: { _controller: "DiplomaBackOfficeBundle:Task:answer" }
+
+task_mark:
+    path:     /{id}/mark
+    defaults: { _controller: "DiplomaBackOfficeBundle:Task:mark" }

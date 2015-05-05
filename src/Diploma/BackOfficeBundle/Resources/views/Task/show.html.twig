@@ -1,16 +1,16 @@
 {% extends 'DiplomaBackOfficeBundle::layout.html.twig' %}
 
 {% block page -%}
-    <h1>Task</h1>
+    <h1>Задание</h1>
 
     <table class="record_properties">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
+                <th>Назначена</th>
+                <td>{{ entity.user.username }}</td>
             </tr>
             <tr>
-                <th>Text</th>
+                <th>Задание</th>
                 <td>
                 {% autoescape "js" %}
                 {{ entity.text | slice(0,500) | raw }}{% if entity.text | length > 500 %}...{% endif %}
@@ -33,9 +33,29 @@
                     {% endautoescape %}
                 </td>
             </tr>
+            <tr>
+                <th>Статус</th>
+                <td>
+                    {% if entity.right %}
+                        <i class="icon-check"></i>
+                    {% else %}
+                        <i class="icon-check-empty"></i>
+                    {% endif %}
+                </td>
+            </tr>
 
         </tbody>
     </table>
+
+    <a class="btn btn-primary" href="{{ path('task_mark', { 'id': entity.id }) }}">
+        {% if not entity.right %}
+            Засчитать ответ
+        {% else %}
+            Снять ответ
+        {% endif %}
+
+    </a>
+
     <a class="btn btn-primary" href="{{ path('task') }}">
         К списку
     </a>

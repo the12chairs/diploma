@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Diploma\BackOfficeBundle\Entity\Task;
 use Diploma\BackOfficeBundle\Form\TaskType;
+use Diploma\BackOfficeBundle\Form\MakeTaskType;
 
 /**
  * Task controller.
@@ -124,6 +125,39 @@ class TaskController extends Controller
         );
     }
 
+
+    /**
+     * Mark Task entity as right.
+     *
+     * @Route("/{id}", name="task_mark")
+     * @Method("GET")
+     * @Template()
+     */
+    public function markAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('DiplomaBackOfficeBundle:Task')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Task entity.');
+        }
+
+        if($entity->getRight()) {
+            $entity->setRight(false);
+        } else {
+            $entity->setRight(true);
+        }
+
+
+        $em->persist($entity);
+
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('task_show', array('id' => $entity->getId())));
+
+    }
+
     /**
      * Displays a form to edit an existing Task entity.
      *
@@ -150,6 +184,57 @@ class TaskController extends Controller
             'delete_form' => $deleteForm->createView(),
         );
     }
+
+
+    /**
+     * Insert answer
+     *
+     * @Route("/{id}/make", name="task_make")
+     * @Method("GET")
+     * @Template()
+     */
+    public function makeAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('DiplomaBackOfficeBundle:Task')->find($id);
+
+        $entity->setSeen(true);
+
+        $em->persist($entity);
+        $em->flush();
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Task entity.');
+        }
+
+        //$editForm = $form = $this->createForm(new MakeTaskType(), $entity);
+
+        $editForm = $this->createForm(new MakeTaskType(), $entity, array(
+            'action' => $this->generateUrl('task_make', array('id' => $entity->getId())),
+            'method' => 'PUT',
+        ));
+
+        $editForm->add('submit', 'submit', array('label' => 'Update'));
+
+        $editForm->handleRequest($request);
+
+        if ($editForm->isValid()) {
+
+
+            $entity->setAnswer($editForm->getData()->getAnswer());
+            $em->persist($entity);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('user_edit'));
+        }
+
+        return array(
+            'task'        => $entity,
+            'edit_form'   => $editForm->createView(),
+        );
+    }
+
 
     /**
     * Creates a form to edit a Task entity.

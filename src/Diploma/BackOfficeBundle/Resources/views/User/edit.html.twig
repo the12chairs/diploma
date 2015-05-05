@@ -19,7 +19,9 @@
             {% if not task.seen %} <i class="icon-certificate"></i> {% endif %}
         {% endautoescape %}
         <div class="clearfix"></div>
-        <a href="#" class="btn btn-primary">Выполнить</a>
+        {% if not task.right %}
+            <a href="{{ path('task_make', {'id': task.id }) }}" class="btn btn-primary">Выполнить</a>
+        {% endif %}
     {% endfor %}
 
 {% endblock %}
