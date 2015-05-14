@@ -18,6 +18,12 @@ class PostType extends AbstractType
             ->add('title', 'text', array(
                 'label' => 'Заголовок'
             ))
+            ->add('postText', 'textarea', array(
+                'attr' => array(
+                    'class' => "ckeditor"
+                )
+            ))
+            /*
             ->add('postText', 'ckeditor', array(
                 'transformers' => array('html_purifier'),
                 'toolbar' => array('document','basicstyles'),
@@ -26,6 +32,7 @@ class PostType extends AbstractType
                 )),
                 'label' => ' '
             ))
+            */
             ->add('tags', 'entity', array(
                 'label' => 'Добавить тэги',
                 'class' => 'DiplomaBackOfficeBundle:Tag',
