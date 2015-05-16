@@ -3,10 +3,19 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <script src="http://www.wiris.net/demo/editor/editor"></script>
+        <script>
+            var editor;
+            window.onload = function () {
+                editor = com.wiris.jsEditor.JsEditor.newInstance({'language': 'en'});
+                editor.insertInto(document.getElementById('editorContainer'));
+            }
+        </script>
         {% block stylesheets %}
             <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.0/css/bootstrap.no-icons.min.css">
             <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css">
-            <link rel="stylesheet" href="web/js/ckeditor/contents.css">
+            <link rel="stylesheet" href="{{ asset('js/ckeditor/contents.css"') }}">
+            <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
         {% endblock %}
     </head>
     <body>
