@@ -87,15 +87,19 @@
         </div>
         <div class="tab-pane fade" id="sandbox_tab">
             <div id="editorContainer"></div>
-            <button id="calculate" class="btn btn-primary">Решение</button>
+            {% for code in entity.scripts %}
+                {{ code.title }}
+                <button id="calculate" class="btn btn-primary">Решение</button>
+                <script>
+                    $('#calculate').on('click', function(){
+                        eval("{{ code.code | raw }}");
+                    });
+                </script>
+            {% endfor %}
         </div>
     </div>
 
-    <script>
-        $('#calculate').on('click', function(){
-            var bubble = new Bubble()
-        });
-    </script>
+
 
 {% endblock %}
 

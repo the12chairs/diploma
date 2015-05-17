@@ -32,12 +32,7 @@
             <script src="{{ asset('js/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
             <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
             <script src="{{ asset('js/codemirror/lib/codemirror.js') }}" type="text/javascript"></script>
-            <script>
-                var editor = CodeMirror.fromTextArea(document.getElementById('diploma_backofficebundle_script_code'), {
-                    lineNumbers: true,
-                    mode:  "javascript"
-                });
-            </script>
+
             <script src="{{ asset('js/codemirror/mode/javascript/javascript.js') }}"></script>
         {% endblock %}
     </body>
