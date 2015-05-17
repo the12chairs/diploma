@@ -20,12 +20,10 @@ class TaskType extends AbstractType
                 'property' => 'username',
                 'label' => 'Назначить'
             ))
-            ->add('text', 'ckeditor', array(
-                'transformers' => array('html_purifier'),
-                'toolbar' => array('document','basicstyles'),
-                'toolbar_groups' => array(
-                    'document' => array('Source'
-                    )),
+            ->add('text', 'textarea', array(
+                'attr' => array(
+                    'class' => "ckeditor"
+                ),
                 'label' => 'Текст задания'
             ))
             /*
@@ -38,12 +36,10 @@ class TaskType extends AbstractType
                 'label' => 'Ответ'
             ))
             */
-            ->add('rightAnswer', 'ckeditor', array(
-                'transformers' => array('html_purifier'),
-                'toolbar' => array('document','basicstyles'),
-                'toolbar_groups' => array(
-                    'document' => array('Source'
-                    )),
+            ->add('rightAnswer', 'textarea', array(
+                'attr' => array(
+                    'class' => "ckeditor"
+                ),
                 'label' => 'Верный ответ'
             ))
         ;
