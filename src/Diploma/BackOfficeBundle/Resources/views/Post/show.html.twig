@@ -87,7 +87,15 @@
         </div>
         <div class="tab-pane fade" id="sandbox_tab">
             <div id="editorContainer"></div>
+            <button id="calculate" class="btn btn-primary">Решение</button>
         </div>
     </div>
 
+    <script>
+        $('#calculate').on('click', function(){
+            var bubble = new Bubble()
+        });
+    </script>
+
 {% endblock %}
+

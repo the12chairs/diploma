@@ -58,6 +58,11 @@ class Post
     **/
     protected $tests;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Script", mappedBy="post")
+     **/
+    protected $scripts;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -172,5 +177,38 @@ class Post
     public function getTests()
     {
         return $this->tests;
+    }
+
+    /**
+     * Add scripts
+     *
+     * @param \Diploma\BackOfficeBundle\Entity\Script $scripts
+     * @return Post
+     */
+    public function addScript(\Diploma\BackOfficeBundle\Entity\Script $scripts)
+    {
+        $this->scripts[] = $scripts;
+
+        return $this;
+    }
+
+    /**
+     * Remove scripts
+     *
+     * @param \Diploma\BackOfficeBundle\Entity\Script $scripts
+     */
+    public function removeScript(\Diploma\BackOfficeBundle\Entity\Script $scripts)
+    {
+        $this->scripts->removeElement($scripts);
+    }
+
+    /**
+     * Get scripts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getScripts()
+    {
+        return $this->scripts;
     }
 }

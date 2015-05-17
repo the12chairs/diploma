@@ -4,6 +4,8 @@ function Bubble(name, code, diff, results, type){
     this.diff = diff;
     this.results = results;
     this.type = type;
+    this.mathML = null;
+    this.equation = null;
 }
 
 Bubble.prototype.evaluateCode = function() {
@@ -12,4 +14,12 @@ Bubble.prototype.evaluateCode = function() {
 
 Bubble.prototype.drawPlot = function(options) {
     $.plot($('#bubblePlot'), this.results, options);
+};
+
+Bubble.prototype.setMathML = function(mathML) {
+    this.mathML = mathML;
+};
+
+Bubble.prototype.parseMathML = function() {
+    //TODO: make
 };
