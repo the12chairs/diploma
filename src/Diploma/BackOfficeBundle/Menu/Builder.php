@@ -41,6 +41,14 @@ class Builder extends ContainerAware
             ;
         }
 
+        if ($this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
+            $menu->addChild('Script', array(
+                'label' => 'Код',
+                'route' => 'script'
+            ))
+                ->setAttribute('icon', 'icon-file')
+                ->setAttribute('divider_prepend', true);
+        }
 
         if ($this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
             $menu->addChild('Tag', array(

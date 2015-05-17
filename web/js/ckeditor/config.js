@@ -39,4 +39,6 @@ CKEDITOR.editorConfig = function( config ) {
     config.extraPlugins = 'dialog';
 
     config.extraPlugins = 'eqneditor';
+
+    config.extraPlugins = 'syntaxhighlight';
 };

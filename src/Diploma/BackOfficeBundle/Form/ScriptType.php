@@ -15,10 +15,20 @@ class ScriptType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('code')
-            ->add('difficult')
-            ->add('post')
+            ->add('title', 'text', array(
+                'label' => 'название'
+            ))
+            ->add('code', 'textarea', array(
+                'label' => 'Код'
+            ))
+            ->add('difficult', 'text', array(
+                'label' => 'Сложность алгоритма'
+            ))
+            ->add('post', 'entity', array(
+                'class' => 'DiplomaBackOfficeBundle:Post',
+                'property' => 'title',
+                'label' => 'Прикрепить к статье'
+            ))
         ;
     }
     

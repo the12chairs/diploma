@@ -1,0 +1,28 @@
+script:
+    path:     /
+    defaults: { _controller: "DiplomaBackOfficeBundle:Script:index" }
+
+script_show:
+    path:     /{id}/show
+    defaults: { _controller: "DiplomaBackOfficeBundle:Script:show" }
+
+script_new:
+    path:     /new
+    defaults: { _controller: "DiplomaBackOfficeBundle:Script:new" }
+
+script_create:
+    path:     /create
+    defaults: { _controller: "DiplomaBackOfficeBundle:Script:create" }
+    methods:  [POST]
+
+script_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DiplomaBackOfficeBundle:Script:edit" }
+
+script_update:
+    path:     /{id}/update
+    defaults: { _controller: "DiplomaBackOfficeBundle:Script:update" }
+
+script_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DiplomaBackOfficeBundle:Script:delete" }

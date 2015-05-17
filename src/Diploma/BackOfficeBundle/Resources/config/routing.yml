@@ -30,6 +30,10 @@ diploma_back_office_message:
     resource: "@DiplomaBackOfficeBundle/Resources/config/routing/message.yml"
     prefix:   /message
 
+diploma_back_office_script:
+    resource: "@DiplomaBackOfficeBundle/Resources/config/routing/script.yml"
+    prefix:   /script
+
 diploma_back_office_homepage:
     path:     /
     defaults: { _controller: "DiplomaBackOfficeBundle:Post:index" }

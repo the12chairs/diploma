@@ -9,13 +9,14 @@
             window.onload = function () {
                 editor = com.wiris.jsEditor.JsEditor.newInstance({'language': 'en'});
                 editor.insertInto(document.getElementById('editorContainer'));
-            }
+            };
         </script>
         {% block stylesheets %}
             <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.0/css/bootstrap.no-icons.min.css">
             <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css">
             <link rel="stylesheet" href="{{ asset('js/ckeditor/contents.css"') }}">
             <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+            <link rel="stylesheet" href="{{ asset('js/codemirror/lib/codemirror.css') }}">
         {% endblock %}
     </head>
     <body>
@@ -25,11 +26,19 @@
             <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
             <script type="text/javascript" src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.0/js/bootstrap.min.js"></script>
             <script type='text/javascript' src='http://mathdox.org/formulaeditor/main.js'></script>
-            <script src="js/flot/jquery.min.js"></script>
-            <script src="js/flot/jquery.flot.min.js"></script>
-            <script src="js/bubble_math.js"></script>
+            <script src="{{ asset('js/flot/jquery.min.js') }}"></script>
+            <script src="{{ asset('js/flot/jquery.flot.min.js') }}"></script>
+            <script src="{{ asset('js/bubble_math.js') }}"></script>
             <script src="{{ asset('js/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
             <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/codemirror/lib/codemirror.js') }}" type="text/javascript"></script>
+            <script>
+                var editor = CodeMirror.fromTextArea(document.getElementById('diploma_backofficebundle_script_code'), {
+                    lineNumbers: true,
+                    mode:  "javascript"
+                });
+            </script>
+            <script src="{{ asset('js/codemirror/mode/javascript/javascript.js') }}"></script>
         {% endblock %}
     </body>
 </html>
