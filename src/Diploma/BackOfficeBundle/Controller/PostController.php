@@ -25,7 +25,7 @@ class PostController extends Controller
 
         $paginator  = $this->get('knp_paginator');
 
-        $dql   = "SELECT p FROM DiplomaBackOfficeBundle:Post p";
+        $dql   = "SELECT p FROM DiplomaBackOfficeBundle:Post p ORDER BY p.createdAt DESC";
         $query = $em->createQuery($dql);
 
         $pagination = $paginator->paginate(
@@ -58,12 +58,12 @@ class PostController extends Controller
             $tags = $form->getData()['tags'][0];
 
             if(!empty($tags)) {
-                $dql   =  "SELECT p FROM DiplomaBackOfficeBundle:Post p INNER JOIN p.tags t WHERE t IN (:tags)";
+                $dql   =  "SELECT p FROM DiplomaBackOfficeBundle:Post p INNER JOIN p.tags t WHERE t IN (:tags) ORDER BY p.createdAt DESC";
 
                 $query = $em->createQuery($dql);
                 $query->setParameter('tags', $tags);
             } else {
-                $dql   = "SELECT p FROM DiplomaBackOfficeBundle:Post p";
+                $dql   = "SELECT p FROM DiplomaBackOfficeBundle:Post p ORDER BY p.createdAt DESC";
                 $query = $em->createQuery($dql);
             }
 

@@ -15,12 +15,10 @@ class MakeTaskType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('answer', 'ckeditor', array(
-                'transformers' => array('html_purifier'),
-                'toolbar' => array('document','basicstyles'),
-                'toolbar_groups' => array(
-                    'document' => array('Source'
-                    )),
+            ->add('answer', 'textarea', array(
+                'attr' => array(
+                    'class' => "ckeditor"
+                ),
                 'label' => ' '
             ))
         ;
