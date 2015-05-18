@@ -8,6 +8,15 @@
             <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css">
             <link rel="stylesheet" href="web/js/ckeditor/contents.css">
         {% endblock %}
+    <script src="http://www.wiris.net/demo/editor/editor"></script>
+    <script>
+    var editor;
+    window.onload = function () {
+      editor = com.wiris.jsEditor.JsEditor.newInstance({'language': 'en', 'toolbarHidden': false});
+            editor.insertInto(document.getElementById('editorContainer'));
+    }
+    </script>
+
     </head>
     <body>
         {% block menu %}{% endblock %}
@@ -20,6 +29,9 @@
             <script src="js/flot/jquery.flot.min.js"></script>
             <script src="js/bubble_math.js"></script>
             <script src="{{ asset('js/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
+
+	    <script type="text/javascript" src="{{ asset('js/pluginwiris/core/core.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/pluginwiris/integration/integration.js') }}"></script>
 
         {% endblock %}
     </body>

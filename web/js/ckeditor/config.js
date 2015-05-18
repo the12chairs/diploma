@@ -39,4 +39,7 @@ CKEDITOR.editorConfig = function( config ) {
     config.extraPlugins = 'dialog';
 
     config.extraPlugins = 'eqneditor';
+
+    config.extraPlugins += (config.extraPlugins.length == 0 ? '' : ',') + 'ckeditor_wiris';
+
 };
