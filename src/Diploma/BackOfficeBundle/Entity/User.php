@@ -33,6 +33,11 @@ class User extends BaseUser
     protected $lastname;
 
     /**
+     * @var string
+     * @ORM\Column(name="group", type="string", length=100)
+     */
+    protected $group;
+    /**
      * @ORM\OneToMany(targetEntity="Task", mappedBy="user")
      **/
     protected $tasks;
@@ -261,5 +266,28 @@ class User extends BaseUser
     public function getToMessages()
     {
         return $this->toMessages;
+    }
+
+    /**
+     * Set group
+     *
+     * @param string $group
+     * @return User
+     */
+    public function setGroup($group)
+    {
+        $this->group = $group;
+
+        return $this;
+    }
+
+    /**
+     * Get group
+     *
+     * @return string 
+     */
+    public function getGroup()
+    {
+        return $this->group;
     }
 }
