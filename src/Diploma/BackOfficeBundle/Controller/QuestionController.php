@@ -53,7 +53,7 @@ class QuestionController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('question_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('test_show', array('id' => $entity->getTest()->getId())));
         }
 
         return array(

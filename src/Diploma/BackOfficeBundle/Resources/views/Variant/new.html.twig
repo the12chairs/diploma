@@ -2,19 +2,12 @@
 
 
 {% block page -%}
-    <h1>QuestionVariant creation</h1>
+    <h1>Добавдение варианта ответа</h1>
 
     <form action="{{ path('variant_create') }}" method="POST">
         {{ form_widget(form) }}
         <button type="submit" class="btn btn-success">Сохранить</button>
     </form>
 
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('variant') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+    <a href="{{ path('test_show', {'id': testId}) }}">К тесту</a>
 {% endblock %}

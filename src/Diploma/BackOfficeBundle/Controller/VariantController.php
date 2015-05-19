@@ -60,7 +60,7 @@ class VariantController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('variant_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('test_show', array('id' => $entity->getQuestion()->getTest()->getId())));
         }
 
         return array(
@@ -111,6 +111,7 @@ class VariantController extends Controller
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
+            'testId' => $question->getTest()->getId()
         );
     }
 
