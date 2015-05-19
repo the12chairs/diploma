@@ -90,9 +90,9 @@
             <div id="editorContainer"></div>
             {% for code in entity.scripts %}
                 {{ code.title }}
-                <button id="calculate" class="btn btn-primary">Решение</button>
+                <button id="calculate_{{ loop.index }}" class="btn btn-primary">Решение</button>
                 <script>
-                    $('#calculate').on('click', function(){
+                    $('#calculate_{{ loop.index }}').on('click', function(){
                         eval("{{ code.code | raw }}");
                     });
                 </script>
