@@ -28,18 +28,18 @@ class Test
     private $title;
 
     /**
-    * @ORM\OneToMany(targetEntity="Question", mappedBy="test")
+    * @ORM\OneToMany(targetEntity="Question", mappedBy="test", cascade={"all"})
     **/
     protected $questions;
 
     /**
-    * @ORM\OneToMany(targetEntity="TestResult", mappedBy="test")
+    * @ORM\OneToMany(targetEntity="TestResult", mappedBy="test", cascade={"all"})
     **/
     protected $results;
 
     /**
     * @var
-    * @ORM\ManyToOne(targetEntity="Post", inversedBy="tests", cascade={"all"})
+    * @ORM\ManyToOne(targetEntity="Post", inversedBy="tests")
     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
     */
     protected $post;

@@ -23,7 +23,7 @@ class QuestionVariant
 
     /**
     * @var
-    * @ORM\ManyToOne(targetEntity="Question", inversedBy="variants", cascade={"all"})
+    * @ORM\ManyToOne(targetEntity="Question", inversedBy="variants")
     * @ORM\JoinColumn(name="variant_id", referencedColumnName="id")
     */
     protected $question;

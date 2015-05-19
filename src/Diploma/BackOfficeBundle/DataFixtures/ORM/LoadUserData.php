@@ -17,6 +17,7 @@ class LoadUserData implements FixtureInterface
         $userAdmin->setFirstname('Максим');
         $userAdmin->setLastname('Бондаренко');
         $userAdmin->setEnabled(true);
+        $userAdmin->setGrouppa('admin');
         $manager->persist($userAdmin);
 
         foreach ($this->getData() as $data) {
@@ -29,7 +30,7 @@ class LoadUserData implements FixtureInterface
             $user->setFirstname($data['firstname']);
             $user->setLastname($data['lastname']);
             $user->setEnabled(true);
-
+            $user->setGrouppa('ИТ-41');
             $manager->persist($user);
         }
 

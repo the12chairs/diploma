@@ -23,14 +23,14 @@ class TestResult
 
     /**
     * @var
-    * @ORM\ManyToOne(targetEntity="User", inversedBy="user", cascade={"all"})
+    * @ORM\ManyToOne(targetEntity="User", inversedBy="user")
     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
     */
     protected $user;
 
     /**
     * @var
-    * @ORM\ManyToOne(targetEntity="Test", inversedBy="test", cascade={"all"})
+    * @ORM\ManyToOne(targetEntity="Test", inversedBy="test")
     * @ORM\JoinColumn(name="test_id", referencedColumnName="id")
     */
     protected $test;

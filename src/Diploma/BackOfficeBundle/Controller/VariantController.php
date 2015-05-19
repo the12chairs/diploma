@@ -224,24 +224,21 @@ class VariantController extends Controller
      * @Route("/{id}", name="variant_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('DiplomaBackOfficeBundle:QuestionVariant')->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('DiplomaBackOfficeBundle:QuestionVariant')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find QuestionVariant entity.');
-            }
+        $testId = $entity->getQuestion()->getTest()->getId();
 
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find QuestionVariant entity.');
         }
 
-        return $this->redirect($this->generateUrl('variant'));
+        $em->remove($entity);
+        $em->flush();
+        return $this->redirect($this->generateUrl('test_show', array('id' => $testId)));
     }
 
     /**

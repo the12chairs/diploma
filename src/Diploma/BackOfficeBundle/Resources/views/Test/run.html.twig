@@ -5,7 +5,23 @@
     <h1>{{ test.title }}</h1>
 
     <form method="POST" action="{{ path('test_handle', {'id': test.id}) }}">
-        {{ form_widget(form) }}
+        <div id="diploma_backofficebundle_test_run">
+            {% for question in form %}
+                {% if loop.last %}
+                    <div style="display: none;">
+                {% endif %}
+
+                {{ form_label(question) }}
+                <div class="variants">
+                    {{ form_widget(question) }}
+                </div>
+
+                {% if loop.last %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
 
         <button type="submit" class="btn btn-primary">Проверить себя</button>
     </form>

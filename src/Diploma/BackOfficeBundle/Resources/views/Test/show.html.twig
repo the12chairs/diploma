@@ -13,10 +13,13 @@
                 <div class="row">
                     <div class="container">
                         {{ variant.variantText }} {% if variant.right %}<i class="fa icon-check"></i>{% endif %}
+                        <a class="btn btn-danger" href="{{ path('variant_delete', {'id': variant.id}) }}">Удалить</a>
                     </div>
                 </div>
             {% endfor %}
+            <br />
             <a class="btn btn-primary" href="{{ path('variant_new', {'questionId': question.id}) }}">Добавить вариант</a>
+            <a class="btn btn-danger" href="{{ path('question_delete', {'id': question.id}) }}">Удалить вопрос</a>
         </div>
     {% endfor %}
     <br />

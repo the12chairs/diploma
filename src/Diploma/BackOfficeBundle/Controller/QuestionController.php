@@ -183,12 +183,9 @@ class QuestionController extends Controller
      * @Route("/{id}", name="question_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction( $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
 
-        if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('DiplomaBackOfficeBundle:Question')->find($id);
 
@@ -196,11 +193,12 @@ class QuestionController extends Controller
                 throw $this->createNotFoundException('Unable to find Question entity.');
             }
 
+            $testId = $entity->getTest()->getId();
+
             $em->remove($entity);
             $em->flush();
-        }
 
-        return $this->redirect($this->generateUrl('question'));
+        return $this->redirect($this->generateUrl('test_show', array('id' => $testId)));
     }
 
     /**

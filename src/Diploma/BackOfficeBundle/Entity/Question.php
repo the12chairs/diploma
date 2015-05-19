@@ -35,7 +35,7 @@ class Question
     protected $questionText;
 
     /**
-    * @ORM\OneToMany(targetEntity="QuestionVariant", mappedBy="question")
+    * @ORM\OneToMany(targetEntity="QuestionVariant", mappedBy="question", cascade={"all"})
     **/
     protected $variants;
 

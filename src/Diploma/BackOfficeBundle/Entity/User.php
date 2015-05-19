@@ -34,31 +34,31 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(name="group", type="string", length=100)
+     * @ORM\Column(name="grouppa", type="string", length=100)
      */
-    protected $group;
+    protected $grouppa;
     /**
      * @ORM\OneToMany(targetEntity="Task", mappedBy="user")
      **/
     protected $tasks;
 
     /**
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="user", cascade={"all"})
      **/
     protected $posts;
 
     /**
-     * @ORM\OneToMany(targetEntity="Message", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="user", cascade={"all"})
      **/
     protected $formMessages;
 
     /**
-     * @ORM\OneToMany(targetEntity="Message", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="user", cascade={"all"})
      **/
     protected $toMessages;
     
     /**
-    * @ORM\OneToMany(targetEntity="TestResult", mappedBy="user")
+    * @ORM\OneToMany(targetEntity="TestResult", mappedBy="user", cascade={"all"})
     **/
     protected $results;
 
@@ -274,9 +274,9 @@ class User extends BaseUser
      * @param string $group
      * @return User
      */
-    public function setGroup($group)
+    public function setGrouppa($grouppa)
     {
-        $this->group = $group;
+        $this->grouppa = $grouppa;
 
         return $this;
     }
@@ -286,8 +286,8 @@ class User extends BaseUser
      *
      * @return string 
      */
-    public function getGroup()
+    public function getGrouppa()
     {
-        return $this->group;
+        return $this->grouppa;
     }
 }

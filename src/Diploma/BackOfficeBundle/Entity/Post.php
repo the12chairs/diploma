@@ -25,7 +25,7 @@ class Post
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="posts", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="posts")
      * @ORM\JoinColumn(name="autor_id", referencedColumnName="id")
      */
     protected $autor;
@@ -54,12 +54,12 @@ class Post
     protected $createdAt;
 
     /**
-    * @ORM\OneToMany(targetEntity="Test", mappedBy="post")
+    * @ORM\OneToMany(targetEntity="Test", mappedBy="post", cascade={"all"})
     **/
     protected $tests;
 
     /**
-     * @ORM\OneToMany(targetEntity="Script", mappedBy="post")
+     * @ORM\OneToMany(targetEntity="Script", mappedBy="post", cascade={"all"})
      **/
     protected $scripts;
 
