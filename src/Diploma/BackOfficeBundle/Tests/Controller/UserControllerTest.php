@@ -6,50 +6,53 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserControllerTest extends WebTestCase
 {
-    /*
-    public function testCompleteScenario()
+    public function testRights()
     {
-        // Create a new client to browse the application
         $client = static::createClient();
 
-        // Create a new entry in the database
-        $crawler = $client->request('GET', '/user/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /user/");
-        $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
+        $crawler = $client->request('GET', 'post/');
 
-        // Fill in the form and submit it
-        $form = $crawler->selectButton('Create')->form(array(
-            'diploma_backofficebundle_user[field_name]'  => 'Test',
-            // ... other fields to fill
-        ));
-
-        $client->submit($form);
-        $crawler = $client->followRedirect();
-
-        // Check data in the show view
-        $this->assertGreaterThan(0, $crawler->filter('td:contains("Test")')->count(), 'Missing element td:contains("Test")');
-
-        // Edit the entity
-        $crawler = $client->click($crawler->selectLink('Edit')->link());
-
-        $form = $crawler->selectButton('Update')->form(array(
-            'diploma_backofficebundle_user[field_name]'  => 'Foo',
-            // ... other fields to fill
-        ));
-
-        $client->submit($form);
-        $crawler = $client->followRedirect();
-
-        // Check the element contains an attribute with value equals "Foo"
-        $this->assertGreaterThan(0, $crawler->filter('[value="Foo"]')->count(), 'Missing element [value="Foo"]');
-
-        // Delete the entity
-        $client->submit($crawler->selectButton('Delete')->form());
-        $crawler = $client->followRedirect();
-
-        // Check the entity has been delete on the list
-        $this->assertNotRegExp('/Foo/', $client->getResponse()->getContent());
+        $this->assertFalse($crawler->filter('html:contains("Редактировать")')->count() > 0);
+        $this->assertFalse($crawler->filter('html:contains("Код")')->count() > 0);
+        $this->assertFalse($crawler->filter('html:contains("Тэги")')->count() > 0);
+        $this->assertFalse($crawler->filter('html:contains("Тесты")')->count() > 0);
+        $this->assertFalse($crawler->filter('html:contains("Задания")')->count() > 0);
     }
 
-    */
+    public function testAnonimous()
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', 'post/');
+
+        $this->assertTrue($crawler->filter('html:contains("Анонимус")')->count() > 0);
+    }
+
+    public function testProfile()
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', 'post/');
+
+        $this->assertFalse($crawler->filter('html:contains("Редактировать профиль")')->count() > 0);
+        $this->assertTrue($crawler->filter('html:contains("Войти")')->count() > 0);
+    }
+
+    public function testLogin()
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', '/login');
+
+        $form = $crawler->selectButton('Вход')->form();
+
+        $form['_username'] = 'admin';
+        $form['_password'] = 'test';
+
+        $crawler = $client->submit($form);
+
+        $crawler = $client->request('GET', 'post/');
+        $this->assertTrue($crawler->filter('html:contains("admin")')->count() > 0);
+
+    }
 }

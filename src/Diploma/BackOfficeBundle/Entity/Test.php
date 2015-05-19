@@ -153,10 +153,15 @@ class Test
 
     public function getMaxResult($user)
     {
+        if(!isset($user)) {
+            return 0;
+        }
         $resArray = array();
         foreach($this->results as $result) {
-            if($result->getUser()->getUsername() == $user) {
-                $resArray[] = $result->getPoints();
+            if($result->getUser() != null) {
+                if($result->getUser()->getUsername() == $user) {
+                    $resArray[] = $result->getPoints();
+                }
             }
         }
         if(empty($resArray)) {
