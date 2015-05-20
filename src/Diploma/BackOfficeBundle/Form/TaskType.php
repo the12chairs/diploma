@@ -18,7 +18,8 @@ class TaskType extends AbstractType
             ->add('user', 'entity', array(
                 'class' => 'DiplomaBackOfficeBundle:User',
                 'property' => 'username',
-                'label' => 'Назначить'
+                'label' => 'Назначить',
+                'required' => false
             ))
             ->add('text', 'textarea', array(
                 'attr' => array(

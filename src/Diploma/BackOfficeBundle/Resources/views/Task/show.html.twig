@@ -7,7 +7,13 @@
         <tbody>
             <tr>
                 <th>Назначена</th>
-                <td>{{ entity.user.username }}</td>
+                <td>
+                    {% if entity.user.username is defined %}
+                        {{ entity.user.username }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Задание</th>
@@ -37,6 +43,16 @@
                 <th>Статус</th>
                 <td>
                     {% if entity.right %}
+                        <i class="icon-check"></i>
+                    {% else %}
+                        <i class="icon-check-empty"></i>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Просмотрена</th>
+                <td>
+                    {% if entity.seen %}
                         <i class="icon-check"></i>
                     {% else %}
                         <i class="icon-check-empty"></i>

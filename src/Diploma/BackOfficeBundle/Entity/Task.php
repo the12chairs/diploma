@@ -24,7 +24,7 @@ class Task
     /**
      * @var
      * @ORM\ManyToOne(targetEntity="User", inversedBy="tasks", cascade={"all"})
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      */
     protected $user;
 
