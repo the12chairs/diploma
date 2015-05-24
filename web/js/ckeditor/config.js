@@ -40,6 +40,7 @@ CKEDITOR.editorConfig = function( config ) {
 
     config.extraPlugins = 'eqneditor';
 
+    config.extraPlugins = 'imagepaste';
     /*config.extraPlugins += (config.extraPlugins.length == 0 ? '' : ',') + 'ckeditor_wiris';*/
 
 };
