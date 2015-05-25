@@ -18,9 +18,9 @@
             <tr>
                 <th>Задание</th>
                 <td>
-                {% autoescape "js" %}
-                {{ entity.text | slice(0,500) | raw }}{% if entity.text | length > 500 %}...{% endif %}
-                {% endautoescape %}
+                    {% autoescape "js" %}
+                    {{ entity.text | slice(0,500) | raw }}{% if entity.text | length > 500 %}...{% endif %}
+                    {% endautoescape %}
                 </td>
             </tr>
             <tr>

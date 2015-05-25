@@ -21,6 +21,9 @@ class UserType extends AbstractType
             ->add('lastname', 'text', array(
                 'label' => 'Фамилия'
             ))
+            ->add('grouppa', 'text', array(
+                'label' => 'Группа'
+            ))
         ;
     }
     
