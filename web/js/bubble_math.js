@@ -25,7 +25,7 @@ Bubble.prototype.setupEquation = function() {
 };
 
 function getDOM(xmlstring) {
-    parser=new DOMParser();
+    parser = new DOMParser();
     return parser.parseFromString(xmlstring, "text/xml");
 }
 
@@ -43,12 +43,51 @@ function remove_tags(node) {
         result = "Math.pow((" + remove_tags(nodes[0]) + "),(" + remove_tags(nodes[1]) + "))";
     } else if (tagName == "msub") {
         result = "digitConvert((" + remove_tags(nodes[0]) + "),(" + remove_tags(nodes[1]) + "))";
-    } else for (var i = 0; i < nodes.length; ++i) {
-        result += remove_tags(nodes[i]);
+    } else if(tagName == "mtable") {
+
+        result = [];
+
+        var cols = 0;
+        var rows = 0;
+
+        for (var i = 0; i < nodes.length; ++i) {
+            if(nodes[i].tagName == 'mtr') {
+                rows++;
+                var mtd = nodes[i].childNodes;
+                cols = mtd.length;
+            }
+        }
+
+        var noTaggedNodes = '';
+
+        for (var i = 0; i < nodes.length; ++i) {
+            noTaggedNodes += (remove_tags(nodes[i]));
+        }
+
+        return arrayedResult(rows, cols, noTaggedNodes);
+    }
+    else {
+        for (var i = 0; i < nodes.length; ++i) {
+            result += remove_tags(nodes[i]);
+        }
     }
 
     if (tagName == "mfenced") result = "("+result+")";
     if (tagName == "msqrt") result = "Math.sqrt("+result+")";
+
+    return result;
+}
+
+function arrayedResult(cols, rows, line) {
+    var result = [];
+    var iterator = 0;
+    for (var i = 0; i < rows; i++) {
+        result[i] = [];
+        for (var j = 0; j < cols; j++) {
+            result[i][j] = line.charAt(iterator);
+            iterator++;
+        }
+    }
 
     return result;
 }
