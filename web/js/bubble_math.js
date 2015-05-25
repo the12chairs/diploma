@@ -1,9 +1,9 @@
-function Bubble(code, results, func){
-    this.code = code;
-    this.results = results;
+function Bubble(){
+    //this.code = code;
+    //this.results = results;
     this.mathML = null;
     this.equation = null;
-    this.func = func;
+    //this.func = func;
 }
 
 Bubble.prototype.evaluateCode = function() {
@@ -40,7 +40,9 @@ function remove_tags(node) {
     } else if (tagName == "mfrac") {
         result = "("+remove_tags(nodes[0])+")/("+remove_tags(nodes[1])+")";
     } else if (tagName == "msup") {
-        result = "Math.pow(("+remove_tags(nodes[0])+"),("+remove_tags(nodes[1])+"))";
+        result = "Math.pow((" + remove_tags(nodes[0]) + "),(" + remove_tags(nodes[1]) + "))";
+    } else if (tagName == "msub") {
+        result = "digitConvert((" + remove_tags(nodes[0]) + "),(" + remove_tags(nodes[1]) + "))";
     } else for (var i = 0; i < nodes.length; ++i) {
         result += remove_tags(nodes[i]);
     }
