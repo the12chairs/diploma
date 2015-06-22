@@ -43,6 +43,7 @@ function remove_tags(node) {
         result = "Math.pow((" + remove_tags(nodes[0]) + "),(" + remove_tags(nodes[1]) + "))";
     } else if (tagName == "msub") {
         result = "digitConvert((" + remove_tags(nodes[0]) + "),(" + remove_tags(nodes[1]) + "))";
+    } else if (tagName == )
     } else for (var i = 0; i < nodes.length; ++i) {
         result += remove_tags(nodes[i]);
     }
