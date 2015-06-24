@@ -10,8 +10,8 @@ Bubble.prototype.evaluateCode = function() {
     this.results = eval(this.code);
 };
 
-Bubble.prototype.drawPlot = function(options) {
-    $.plot($('#bubblePlot'), this.results, options);
+Bubble.prototype.drawPlot = function(result, options) {
+    $.plot($('#bubblePlot'), [result]);
 };
 
 Bubble.prototype.setMathML = function(mathML) {
@@ -68,7 +68,7 @@ function removeTags(node) {
     }
     else {
         for (var i = 0; i < nodes.length; ++i) {
-            result += remove_tags(nodes[i]);
+            result += removeTags(nodes[i]);
         }
     }
 
