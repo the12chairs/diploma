@@ -109,7 +109,29 @@ class Builder extends ContainerAware
             ;
         }
 
+        if ($this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
+            $menu->addChild('Image', array(
+                'label' => 'Изображения',
+            ))
+                ->setAttribute('icon', 'icon-columns')
+                ->setAttribute('divider_prepend', true)
+                ->setAttribute('dropdown', true)
+            ;
 
+            $menu['Image']->addChild('Index', array(
+                'route' => 'file',
+                'label' => 'Список изображений'
+            ))
+                ->setAttribute('icon', 'icon-list')
+            ;
+
+            $menu['Image']->addChild('Create', array(
+                'route' => 'file_upload',
+                'label' => 'Добавить изображение'
+            ))
+                ->setAttribute('icon', 'icon-pencil')
+            ;
+        }
 
         return $menu;
     }

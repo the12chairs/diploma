@@ -1,3 +1,7 @@
+diploma_back_office_file:
+    resource: "@DiplomaBackOfficeBundle/Resources/config/routing/file.yml"
+    prefix:   /file
+
 diploma_back_office_tag:
     resource: "@DiplomaBackOfficeBundle/Resources/config/routing/tag.yml"
     prefix:   /tag

@@ -105,4 +105,27 @@ class QuestionVariant
     {
         $this->right = $right;
     }
+
+    /**
+     * Set right
+     *
+     * @param boolean $right
+     * @return QuestionVariant
+     */
+    public function setRight($right)
+    {
+        $this->right = $right;
+
+        return $this;
+    }
+
+    /**
+     * Get right
+     *
+     * @return boolean 
+     */
+    public function getRight()
+    {
+        return $this->right;
+    }
 }

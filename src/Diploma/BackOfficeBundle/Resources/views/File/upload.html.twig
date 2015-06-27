@@ -1,0 +1,20 @@
+{% extends 'DiplomaBackOfficeBundle::layout.html.twig' %}
+
+
+{% block page -%}
+    <h1>Добавить изображение</h1>
+
+    <form method="POST" action="{{ path('file_upload') }}" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <br />
+        <button type="submit" class="btn btn-success">Создать</button>
+    </form>
+
+    <ul class="record_actions">
+        <li>
+            <a class="btn btn-primary" href="{{ path('file') }}">
+                К списку тестов
+            </a>
+        </li>
+    </ul>
+{% endblock %}
